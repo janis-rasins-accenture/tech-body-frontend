@@ -12,12 +12,20 @@ const CustomAccordion = ({ texts }: CustomAccordionProps): React.JSX.Element | n
       }
     }
   }, [texts])
+  const onClickHandler = (event: React.SyntheticEvent) => {
+    const newActiveItem = event.currentTarget.parentElement?.dataset.item
+    if (newActiveItem && newActiveItem !== activeItem) {
+      setActiveItem(newActiveItem)
+    }
+  }
   const itemRender = (): JSX.Element[] => {
     const result = texts.map((item, index) => {
       const indexString = index.toString()
       return (
         <Accordion.Item eventKey={indexString} key={`Accordion-${indexString}`}>
-          <Accordion.Header>{item.title}</Accordion.Header>
+          <Accordion.Header onClick={onClickHandler} data-item={indexString}>
+            {item.title}
+          </Accordion.Header>
           <Accordion.Body>{item.text}</Accordion.Body>
         </Accordion.Item>
       )

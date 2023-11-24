@@ -5,12 +5,12 @@ import { Text } from './components/Accordion/models'
 const App = (): React.JSX.Element => {
   const texts: Text[] = [
     {
-      isActive: true,
+      isActive: false,
       text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
       title: 'Title',
     },
     {
-      isActive: false,
+      isActive: true,
       text: 'Fuga fugiat doloremque optio pariatur minus repudiandae, necessitatibus laudantium magnam voluptatum, eius saepe possimus harum eos natus eaque voluptate cupiditate?',
       title: 'Second Title',
     },
