@@ -1,17 +1,20 @@
 import React from 'react'
-import { CustomCarouselProps } from './models'
 import Carousel from 'react-bootstrap/Carousel'
 import CarouselItemExample from '../CarouselItemExample/CarouselItemExample'
+import { useSelector } from 'react-redux'
+import { getImages } from '../../store/selector'
 
-const CarouseExample = (props: CustomCarouselProps): JSX.Element => {
+const CarouseExample = (): JSX.Element => {
   //   const [index, setIndex] = useState(0);
 
   // const handleSelect = (selectedIndex) => {
   //   setIndex(selectedIndex);
   // };
 
+  const images = useSelector(getImages) ?? []
+
   const itemRender = (): JSX.Element[] => {
-    return props.images.map((item, index) => {
+    return images.map((item, index) => {
       return (
         <Carousel.Item key={`custom-carousel-${index.toString()}`}>
           <CarouselItemExample item={item} />
@@ -24,7 +27,7 @@ const CarouseExample = (props: CustomCarouselProps): JSX.Element => {
     })
   }
 
-  return <Carousel>{itemRender()}</Carousel>
+  return images?.length ? <Carousel>{itemRender()}</Carousel> : <></>
 }
 
 export default CarouseExample
