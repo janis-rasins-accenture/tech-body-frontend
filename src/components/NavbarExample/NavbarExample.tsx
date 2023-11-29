@@ -15,13 +15,14 @@ const NavbarExample = () => {
             <Link to="/" className="nav-link">
               <img alt="" src={Logo} width="30" height="30" className="d-inline-block align-top" />{' '}
             </Link>
-
             <Link to="/carousel" className="nav-link">
               Carousel
             </Link>
-
             <Link to="/accordion" className="nav-link">
               Accordion
+            </Link>
+            <Link to="/users" className="nav-link">
+              Users
             </Link>
           </Nav>
         </Navbar.Collapse>
