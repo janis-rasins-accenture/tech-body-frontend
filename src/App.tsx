@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import { Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getUsers } from './store/selector'
+import UserCards from './components/UserCards/UserCards'
 
 const App = (): React.JSX.Element => {
   const users = useSelector(getUsers)
@@ -17,6 +18,7 @@ const App = (): React.JSX.Element => {
       <Routes>
         <Route path="/" element={<CustomAccordion />} />
         <Route path="/carousel" element={<CarouseExample />} />
+        <Route path="/users" element={<UserCards users={users} />} />
       </Routes>
     </Container>
   )
