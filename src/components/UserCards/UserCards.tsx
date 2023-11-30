@@ -9,8 +9,15 @@ const UserCards = (props: UserCardsProps): JSX.Element => {
   return (
     <Container fluid>
       <Row>
-        {props.users?.map((item, index) => (
-          <Col key={`custom-user-${index.toString()}`} xs={12} sm={6} md={4} xl={3}>
+        {props.users?.map((item) => (
+          <Col
+            key={`custom-user-${item.userId}`}
+            xs={12}
+            sm={6}
+            md={4}
+            xl={3}
+            className="align-items-stretch"
+          >
             <UserCardsItem item={item} />
           </Col>
         ))}
