@@ -7,7 +7,7 @@ const CarouselItemExample = (props: CarouselItemExampleProps): JSX.Element => {
 
   return (
     <div>
-      <ImageComponent src={link} alt={title} fluid />
+      <ImageComponent src={link} alt={title} fluid className="w-100" />
     </div>
   )
 }

@@ -21,6 +21,9 @@ const NavbarExample = () => {
             <Link to="/accordion" className="nav-link">
               Accordion
             </Link>
+            <Link to="/users" className="nav-link">
+              Users
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -29,4 +32,3 @@ const NavbarExample = () => {
 }
 
 export default NavbarExample
-export {}

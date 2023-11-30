@@ -1,10 +1,15 @@
 import React from 'react'
 import Accordion from 'react-bootstrap/Accordion'
-import { CustomAccordionProps } from './models'
+import { useSelector } from 'react-redux'
+import { getTexts } from '../../store/selector'
 
-const CustomAccordion = ({ texts }: CustomAccordionProps): React.JSX.Element | null => {
+const CustomAccordion = (): React.JSX.Element | null => {
+  const texts = useSelector(getTexts)
   const [activeItem, setActiveItem] = React.useState('0')
   React.useEffect(() => {
+    if (!texts?.length) {
+      return
+    }
     for (const index in texts) {
       if (texts[index].isActive) {
         setActiveItem(index)
@@ -19,6 +24,9 @@ const CustomAccordion = ({ texts }: CustomAccordionProps): React.JSX.Element | n
     }
   }
   const itemRender = (): JSX.Element[] => {
+    if (!texts?.length) {
+      return [<></>]
+    }
     const result = texts.map((item, index) => {
       const indexString = index.toString()
       return (
@@ -32,7 +40,7 @@ const CustomAccordion = ({ texts }: CustomAccordionProps): React.JSX.Element | n
     })
     return result
   }
-  return <Accordion activeKey={activeItem}>{itemRender()}</Accordion>
+  return texts?.length ? <Accordion activeKey={activeItem}>{itemRender()}</Accordion> : <></>
 }
 
 export default CustomAccordion

@@ -1,30 +1,33 @@
-import React, { useState } from 'react'
-import { CustomCarouselProps } from './models'
-import Carousel from 'react-bootstrap/Carousel';
-import CarouselItemExample from '../CarouselItemExample/CarouselItemExample';
+import React from 'react'
+import Carousel from 'react-bootstrap/Carousel'
+import CarouselItemExample from '../CarouselItemExample/CarouselItemExample'
+import { useSelector } from 'react-redux'
+import { getImages } from '../../store/selector'
 
-const CarouseExample = (props: CustomCarouselProps): JSX.Element => {
+const CarouseExample = (): JSX.Element => {
   //   const [index, setIndex] = useState(0);
 
   // const handleSelect = (selectedIndex) => {
   //   setIndex(selectedIndex);
   // };
 
-  const itemRender = (): JSX.Element[] => {
-    return props.images.map((item, index) => {
-      return (
-        <Carousel.Item key={index}>
-            <CarouselItemExample item={item}/>
-            <Carousel.Caption>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-            </Carousel.Caption>
-        </Carousel.Item>
-      );
-    });
-  };
+  const images = useSelector(getImages) ?? []
 
-  return <Carousel>{itemRender()}</Carousel>;
+  const itemRender = (): JSX.Element[] => {
+    return images.map((item, index) => {
+      return (
+        <Carousel.Item key={`custom-carousel-${index.toString()}`}>
+          <CarouselItemExample item={item} />
+          <Carousel.Caption>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      )
+    })
+  }
+
+  return images?.length ? <Carousel>{itemRender()}</Carousel> : <></>
 }
 
 export default CarouseExample
