@@ -1,16 +1,18 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import { UserCardsItemProps } from '../UserCards/models'
+import { UserCardsItemProps } from './models'
+import Image from 'react-bootstrap/Image'
 
-const UserCardsItem = (props: UserCardsItemProps): JSX.Element => {
-  const { nameFirst, nameLast, image, email } = props.item
-
+const UserCardsItem = ({ item }: UserCardsItemProps): JSX.Element => {
+  const { email, firstName, lastName, avatarUrl } = item
   return (
-    <Card style={{ width: '100%' }}>
-      <Card.Img variant="top" src={image} />
+    <Card className="d-flex align-self-stretch">
+      <Card.Header className="text-center py-3">
+        <Image src={avatarUrl} roundedCircle />
+      </Card.Header>
       <Card.Body>
         <Card.Title>
-          {nameFirst} {nameLast}
+          {firstName} {lastName}
         </Card.Title>
         <Card.Text>{email}</Card.Text>
       </Card.Body>

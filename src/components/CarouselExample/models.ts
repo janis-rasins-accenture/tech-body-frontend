@@ -7,9 +7,3 @@ export interface CustomCarouselProps {
 export interface CarouselItemExampleProps {
   item: ImageModel
 }
-
-export interface ImageModel {
-  title: string
-  link: string
-  description: string
-}
