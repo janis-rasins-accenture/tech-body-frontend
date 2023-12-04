@@ -3,26 +3,6 @@ import { ActionTypes } from './actionTypes'
 import { RootState } from './types'
 
 const defaultState = {
-  users: [
-    {
-      userId: '1',
-      firstName: 'Courtney',
-      lastName: 'Will',
-      email: 'Courtney57@example.com',
-      avatarUrl:
-        'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/567.jpg',
-      userName: 'Courtney_Will',
-    },
-    {
-      userId: '2',
-      firstName: 'Barbara',
-      lastName: 'Rohan',
-      email: 'Barbara.Rohan71@example.com',
-      avatarUrl:
-        'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/855.jpg',
-      userName: 'Barbara8',
-    },
-  ],
   texts: [
     {
       isActive: false,
