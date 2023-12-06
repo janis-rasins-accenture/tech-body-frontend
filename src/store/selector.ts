@@ -4,8 +4,8 @@ export const getUsers = (state: RootState) => {
   return state.users
 }
 
-export const getImages = (state: RootState) => {
-  return state.images
+export const getCarouselSlides = (state: RootState) => {
+  return state.carouselSlides
 }
 
 export const getTexts = (state: RootState) => {
