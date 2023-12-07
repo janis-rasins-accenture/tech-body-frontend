@@ -1,8 +1,6 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import CarouselItemExample from '../CarouselItemExample/CarouselItemExample'
-//import { useSelector } from 'react-redux'
-//import { getCarouselSlides } from '../../store/selector'
 import { CustomCarouselProps } from './models'
 
 const CarouseExample = (props: CustomCarouselProps): JSX.Element => {
