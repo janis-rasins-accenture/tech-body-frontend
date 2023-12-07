@@ -1,6 +1,10 @@
-import { API_URL, STAGE, getData } from './api'
+import { API_URL, STAGE, getData, processError } from './api'
 
 export async function fetchCarouselSlides() {
   const options = getData()
-  return fetch(`${API_URL}/${STAGE}/carouselSlides`, options).then((response) => response.json())
+  return fetch(`${API_URL}/${STAGE}/carouselSlides`, options)
+    .then((response) => response.json())
+    .catch((error: any) => {
+      processError(error)
+    })
 }
