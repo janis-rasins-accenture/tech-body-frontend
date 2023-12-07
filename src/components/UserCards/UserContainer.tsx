@@ -5,6 +5,7 @@ import { fetchUsers } from '../../api/usersApi'
 import { setUsers } from '../../store/action'
 import { UserIF } from '../../store/types'
 import UserCards from './UserCards'
+import processStandardError from '../../utils/processError'
 
 const UserContainer = () => {
   const users: UserIF[] | undefined = useSelector(getUsers)
@@ -12,9 +13,13 @@ const UserContainer = () => {
 
   React.useEffect(() => {
     if (!users?.length) {
-      fetchUsers().then((data) => {
-        dispatch(setUsers(data.data))
-      })
+      fetchUsers()
+        .then((data) => {
+          dispatch(setUsers(data.data))
+        })
+        .catch((error) => {
+          processStandardError(error)
+        })
     }
   }, [users, dispatch])
   return users?.length ? <UserCards users={users} /> : null

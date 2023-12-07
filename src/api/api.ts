@@ -20,3 +20,10 @@ export const getData = () => {
   delete fetchOptions.body
   return fetchOptions
 }
+
+export const processError = (error: any) => {
+  if (error.message) {
+    throw new Error(error.message)
+  }
+  throw new Error(JSON.stringify(error))
+}

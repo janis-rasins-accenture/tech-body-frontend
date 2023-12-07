@@ -5,6 +5,7 @@ import { fetchCarouselSlides } from '../../api/slidesApi'
 import { setCarouselSlides } from '../../store/action'
 import { CarouselSlidesModel } from '../../store/types'
 import CarouselExample from './CarouselExample'
+import processStandardError from '../../utils/processError'
 
 const CarouselContainer = () => {
   const carouselSlides: CarouselSlidesModel[] | undefined = useSelector(getCarouselSlides)
@@ -12,9 +13,13 @@ const CarouselContainer = () => {
 
   React.useEffect(() => {
     if (!carouselSlides) {
-      fetchCarouselSlides().then((data) => {
-        dispatch(setCarouselSlides(data.data))
-      })
+      fetchCarouselSlides()
+        .then((data) => {
+          dispatch(setCarouselSlides(data.data))
+        })
+        .catch((error) => {
+          processStandardError(error)
+        })
     }
   }, [carouselSlides, dispatch])
   return carouselSlides ? <CarouselExample carouselSlides={carouselSlides} /> : null
