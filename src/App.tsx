@@ -1,6 +1,6 @@
 import React from 'react'
 import CustomAccordion from './components/Accordion/Accordion'
-import CarouseExample from './components/CarouselExample/CarouseExample'
+import CarouselContainer from './components/CarouselExample/CarouselContainer'
 import NavbarExample from './components/NavbarExample/NavbarExample'
 import Container from 'react-bootstrap/Container'
 import { Route, Routes } from 'react-router-dom'
@@ -11,9 +11,10 @@ const App = (): React.JSX.Element => {
     <Container>
       <NavbarExample />
       <Routes>
-        <Route path="/" element={<CustomAccordion />} />
-        <Route path="/carousel" element={<CarouseExample />} />
+        <Route path="/" />
+        <Route path="/carousel" element={<CarouselContainer />} />
         <Route path="/users" element={<UserContainer />} />
+        <Route path="/accordion" element={<CustomAccordion />} />
       </Routes>
     </Container>
   )

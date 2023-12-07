@@ -1,7 +1,7 @@
 export interface RootState {
   users?: UserIF[]
   texts?: Text[]
-  images?: ImageModel[]
+  carouselSlides?: CarouselSlidesModel[]
 }
 
 export interface UserIF {
@@ -19,7 +19,7 @@ export interface Text {
   isActive: boolean
 }
 
-export interface ImageModel {
+export interface CarouselSlidesModel {
   title: string
   link: string
   description: string

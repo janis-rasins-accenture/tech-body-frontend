@@ -1,9 +1,9 @@
-import { ImageModel } from '../../store/types'
+import { CarouselSlidesModel } from '../../store/types'
 
 export interface CustomCarouselProps {
-  images: ImageModel[]
+  carouselSlides: CarouselSlidesModel[]
 }
 
 export interface CarouselItemExampleProps {
-  item: ImageModel
+  item: CarouselSlidesModel
 }
