@@ -13,5 +13,5 @@ export async function fetchUsers() {
 export async function createUser(userData: BasicUserIF) {
   console.log('createUser()', userData)
   const options = createData(userData)
-  return fetch(`${API_URL}/${STAGE}/users`, options).then((response) => response.json()) //fetch(http://localhost:4000/local/users/createData) = createUser(userData: any)
+  return fetch(`${API_URL}/${STAGE}/users`, options).then((response) => response.json()) //fetch(http://localhost:4000/local/users/createData)
 }
