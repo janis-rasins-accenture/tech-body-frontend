@@ -11,3 +11,7 @@ export const getCarouselSlides = (state: RootState) => {
 export const getTexts = (state: RootState) => {
   return state.texts
 }
+
+export const createUser = (state: RootState) => {
+  return state.values
+}

@@ -24,6 +24,9 @@ const NavbarExample = () => {
             <Link to="/users" className="nav-link">
               Users
             </Link>
+            <Link to="/forms" className="nav-link">
+              Forms
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
