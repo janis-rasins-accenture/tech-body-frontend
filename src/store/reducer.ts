@@ -20,14 +20,22 @@ const defaultState = {
 const reducer = (state: RootState = defaultState, action: PayloadAction<any>): RootState => {
   switch (action.type) {
     case ActionTypes.SET_USERS:
+      console.log('ActionTypes.SET_USERS', state)
       return {
         ...state,
         users: action.payload, // Store fetched users data in users state
       }
     case ActionTypes.SET_SLIDES:
+      console.log('ActionTypes.SET_SLIDES', state)
       return {
         ...state,
         carouselSlides: action.payload, // Store fetched carousel slides in carouselSlides state
+      }
+    case ActionTypes.SUBMIT_FORM:
+      console.log('ActionTypes.SUBMIT_FORM', state)
+      return {
+        ...state,
+        values: action.payload,
       }
     default:
       return state

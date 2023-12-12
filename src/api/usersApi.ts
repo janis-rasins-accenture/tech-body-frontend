@@ -1,4 +1,5 @@
-import { API_URL, STAGE, getData, processError } from './api'
+import { BasicUserIF } from '../store/types'
+import { API_URL, STAGE, getData, processError, createData } from './api'
 
 export async function fetchUsers() {
   const options = getData()
@@ -7,4 +8,10 @@ export async function fetchUsers() {
     .catch((error: unknown) => {
       processError(error)
     })
+}
+
+export async function createUser(userData: BasicUserIF) {
+  console.log('createUser()', userData)
+  const options = createData(userData)
+  return fetch(`${API_URL}/${STAGE}/users`, options).then((response) => response.json()) //fetch(http://localhost:4000/local/users/createData) = createUser(userData: any)
 }
