@@ -1,16 +1,16 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+import BootstrapNavbar from 'react-bootstrap/Navbar'
 import Logo from '../../assets/ACN.svg'
 import { Link } from 'react-router-dom'
 
-const NavbarExample = () => {
+const Navbar = () => {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <BootstrapNavbar expand="lg" className="bg-body-tertiary mb-4">
       <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <BootstrapNavbar.Toggle aria-controls="basic-BootstrapNavbar-nav" />
+        <BootstrapNavbar.Collapse id="basic-BootstrapNavbar-nav">
           <Nav className="me-auto">
             <Link to="/" className="nav-link">
               <img alt="" src={Logo} width="30" height="30" className="d-inline-block align-top" />{' '}
@@ -28,10 +28,10 @@ const NavbarExample = () => {
               Forms
             </Link>
           </Nav>
-        </Navbar.Collapse>
+        </BootstrapNavbar.Collapse>
       </Container>
-    </Navbar>
+    </BootstrapNavbar>
   )
 }
 
-export default NavbarExample
+export default Navbar

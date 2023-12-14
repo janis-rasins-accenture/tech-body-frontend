@@ -10,3 +10,10 @@ export interface FetchOptionsIF {
   referrerPolicy: ReferrerPolicy
   body?: string
 }
+
+export interface CreateUserResponseIF {
+  message: string
+  data: {
+    userId: string
+  }
+}

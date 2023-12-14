@@ -1,5 +1,5 @@
 import React from 'react'
-import { submitForm } from '../../store/action'
+import { addUser, submitForm } from '../../store/action'
 import { createUser } from '../../api/usersApi'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Container from 'react-bootstrap/Container'
-import { BasicUserIF } from '../../store/types'
+import { BasicUserIF, UserIF } from '../../store/types'
 import * as formik from 'formik'
 import * as yup from 'yup'
 import { connect, useDispatch } from 'react-redux'
@@ -28,7 +28,12 @@ const FormsContainer = ({ submitForm }: any) => {
     try {
       console.log(values)
       dispatch(submitForm(values))
-      await createUser(values)
+      const response = await createUser(values)
+      const user: UserIF = {
+        ...values,
+        userId: response.data.userId,
+      }
+      dispatch(addUser(user))
     } catch (error) {
       console.error('Error creating user:', error)
     }
@@ -134,4 +139,8 @@ const FormsContainer = ({ submitForm }: any) => {
   )
 }
 
-export default connect(null, { submitForm })(FormsContainer)
+const mapDispatchToProps = {
+  submitForm,
+}
+
+export default connect(null, mapDispatchToProps)(FormsContainer)

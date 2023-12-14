@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image'
 const UserCardsItem = ({ item }: UserCardsItemProps): JSX.Element => {
   const { email, firstName, lastName, avatarUrl } = item
   return (
-    <Card className="d-flex align-self-stretch">
+    <Card className="d-flex w-100 mb-4">
       <Card.Header className="text-center py-3">
         <Image src={avatarUrl} roundedCircle />
       </Card.Header>

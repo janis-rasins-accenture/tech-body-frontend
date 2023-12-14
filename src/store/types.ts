@@ -3,6 +3,7 @@ export interface RootState {
   texts?: Text[]
   carouselSlides?: CarouselSlidesModel[]
   values?: BasicUserIF
+  currentUser?: UserIF
 }
 
 export interface BasicUserIF {

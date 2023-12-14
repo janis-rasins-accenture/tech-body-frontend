@@ -1,17 +1,18 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { getUsers } from '../../store/selector'
 import { fetchUsers } from '../../api/usersApi'
 import { setUsers } from '../../store/action'
-import { UserIF } from '../../store/types'
+import { RootState, UserIF } from '../../store/types'
 import UserCards from './UserCards'
 import processStandardError from '../../utils/processError'
 
-const UserContainer = () => {
-  const users: UserIF[] | undefined = useSelector(getUsers)
+const UserContainer = ({ users }: { users: UserIF[] | undefined }) => {
+  console.log('Render users!')
   const dispatch = useDispatch()
 
   React.useEffect(() => {
+    console.log('Users: ', !users?.length)
     if (!users?.length) {
       fetchUsers()
         .then((data) => {
@@ -25,4 +26,8 @@ const UserContainer = () => {
   return users?.length ? <UserCards users={users} /> : null
 }
 
-export default UserContainer
+const mapStateToProps = (state: RootState) => ({
+  users: getUsers(state),
+})
+
+export default connect(mapStateToProps, {})(UserContainer)

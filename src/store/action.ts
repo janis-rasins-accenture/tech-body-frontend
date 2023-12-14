@@ -1,12 +1,17 @@
 import { ActionTypes } from './actionTypes'
-import { UserIF } from './types'
-import { BasicUserIF } from './types'
-import { CarouselSlidesModel } from './types'
+import { UserIF, BasicUserIF, CarouselSlidesModel } from './types'
 
 export const setUsers = (users: UserIF[]) => {
   return {
     type: ActionTypes.SET_USERS,
     payload: users,
+  }
+}
+
+export const addUser = (user: UserIF) => {
+  return {
+    type: ActionTypes.ADD_USER,
+    payload: user,
   }
 }
 

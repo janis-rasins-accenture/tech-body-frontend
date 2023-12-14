@@ -1,7 +1,7 @@
 import React from 'react'
 import CustomAccordion from './components/Accordion/Accordion'
 import CarouselContainer from './components/CarouselExample/CarouselContainer'
-import NavbarExample from './components/NavbarExample/NavbarExample'
+import Navbar from './components/Navbar/Navbar'
 import Container from 'react-bootstrap/Container'
 import { Route, Routes } from 'react-router-dom'
 import UserContainer from './components/UserCards/UserContainer'
@@ -10,7 +10,7 @@ import FormsContainer from './components/Forms/FormsContainer'
 const App = (): React.JSX.Element => {
   return (
     <Container>
-      <NavbarExample />
+      <Navbar />
       <Routes>
         <Route path="/" />
         <Route path="/carousel" element={<CarouselContainer />} />
