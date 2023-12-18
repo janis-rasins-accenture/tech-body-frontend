@@ -6,17 +6,18 @@ import Container from 'react-bootstrap/Container'
 import { Route, Routes } from 'react-router-dom'
 import UserContainer from './components/UserCards/UserContainer'
 import FormsContainer from './components/Forms/FormsContainer'
+import FormLogin from './components/FormLogin/FormLogin'
 
 const App = (): React.JSX.Element => {
   return (
     <Container>
       <Navbar />
       <Routes>
-        <Route path="/" />
-        <Route path="/carousel" element={<CarouselContainer />} />
+        <Route path="/" element={<CarouselContainer />} />
         <Route path="/users" element={<UserContainer />} />
-        <Route path="/accordion" element={<CustomAccordion />} />
-        <Route path="/forms" element={<FormsContainer />} />
+        <Route path="/faq" element={<CustomAccordion />} />
+        <Route path="/registration" element={<FormsContainer />} />
+        <Route path="/login" element={<FormLogin />} />
       </Routes>
     </Container>
   )

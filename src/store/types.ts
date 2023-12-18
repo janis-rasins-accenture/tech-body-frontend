@@ -12,6 +12,11 @@ export interface BasicUserIF {
   email: string
   avatarUrl?: string
   userName: string
+  password: string
+}
+
+export interface UserFormValues extends BasicUserIF {
+  confirmPassword: string
 }
 
 export interface UserIF extends BasicUserIF {

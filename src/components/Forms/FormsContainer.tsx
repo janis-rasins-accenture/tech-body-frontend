@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Container from 'react-bootstrap/Container'
-import { BasicUserIF, UserIF } from '../../store/types'
+import { UserFormValues, UserIF } from '../../store/types'
 import * as formik from 'formik'
 import * as yup from 'yup'
 import { connect, useDispatch } from 'react-redux'
@@ -21,38 +21,65 @@ const FormsContainer = ({ submitForm }: any) => {
     lastName: yup.string().min(2).max(20).required(),
     userName: yup.string().min(2).max(20).required(),
     email: yup.string().email().required(),
+    password: yup
+      .string()
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/)
+      .required(),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password')], 'Passwords must match')
+      .required('Please confirm your password'),
     avatarUrl: yup.string().url(),
   })
 
-  const handleSubmit = async (values: BasicUserIF) => {
+  const handleSubmit = async (values: UserFormValues, { resetForm }: any) => {
     try {
       console.log(values)
       dispatch(submitForm(values))
       const response = await createUser(values)
-      const user: UserIF = {
-        ...values,
-        userId: response.data.userId,
+
+      if (response && response.data && response.data.userId) {
+        const user: UserIF = {
+          ...values,
+          userId: response.data.userId,
+        }
+        dispatch(addUser(user))
+      } else {
+        console.error('Invalid response format or missing userId')
       }
-      dispatch(addUser(user))
+      resetForm({
+        values: {
+          firstName: '',
+          lastName: '',
+          userName: '',
+          email: '',
+          avatarUrl: '',
+          password: '',
+          confirmPassword: '',
+        },
+      })
     } catch (error) {
       console.error('Error creating user:', error)
     }
   }
-
   return (
     <Container>
       <Formik
         validationSchema={schema}
-        onSubmit={(values) => handleSubmit(values)}
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values, { resetForm })
+        }}
         initialValues={{
           firstName: '',
           lastName: '',
           userName: '',
           email: '',
           avatarUrl: '',
+          password: '',
+          confirmPassword: '',
         }}
       >
-        {({ handleSubmit, handleChange, touched, values, errors }) => (
+        {({ handleChange, handleSubmit, touched, values, errors }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Form.Group as={Col} md="6" controlId="validationFormik01">
@@ -62,10 +89,10 @@ const FormsContainer = ({ submitForm }: any) => {
                   name="firstName"
                   value={values.firstName}
                   onChange={handleChange}
-                  isInvalid={!!errors.firstName}
+                  isInvalid={touched.firstName && !!errors.firstName}
                   isValid={touched.firstName && !errors.firstName}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="6" controlId="validationFormik02">
@@ -75,7 +102,7 @@ const FormsContainer = ({ submitForm }: any) => {
                   name="lastName"
                   value={values.lastName}
                   onChange={handleChange}
-                  isInvalid={!!errors.lastName}
+                  isInvalid={touched.lastName && !!errors.lastName}
                   isValid={touched.lastName && !errors.lastName}
                 />
 
@@ -96,7 +123,7 @@ const FormsContainer = ({ submitForm }: any) => {
                     value={values.userName}
                     onChange={handleChange}
                     isValid={touched.userName && !errors.userName}
-                    isInvalid={!!errors.userName}
+                    isInvalid={touched.userName && !!errors.userName}
                   />
                   <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                   <Form.Control.Feedback type="invalid">{errors.userName}</Form.Control.Feedback>
@@ -110,7 +137,7 @@ const FormsContainer = ({ submitForm }: any) => {
                   name="email"
                   value={values.email}
                   onChange={handleChange}
-                  isInvalid={!!errors.email}
+                  isInvalid={touched.email && !!errors.email}
                   isValid={touched.email && !errors.email}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -118,7 +145,39 @@ const FormsContainer = ({ submitForm }: any) => {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group controlId="validationFormik05">
+              <Form.Group as={Col} md="6" controlId="validationFormik04">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  isInvalid={touched.password && !!errors.password}
+                  isValid={touched.password && !errors.password}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="6" controlId="validationFormik05">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm password"
+                  name="confirmPassword"
+                  value={values.confirmPassword}
+                  onChange={handleChange}
+                  isInvalid={touched.confirmPassword && !!errors.confirmPassword}
+                  isValid={touched.confirmPassword && !errors.confirmPassword}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  {errors.confirmPassword}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group controlId="validationFormik06">
                 <Form.Label>Avatar URL</Form.Label>
                 <Form.Control
                   type="text"
@@ -126,8 +185,6 @@ const FormsContainer = ({ submitForm }: any) => {
                   name="avatarUrl"
                   value={values.avatarUrl}
                   onChange={handleChange}
-                  isInvalid={!!errors.avatarUrl}
-                  isValid={!!errors.avatarUrl}
                 />
               </Form.Group>
             </Row>
