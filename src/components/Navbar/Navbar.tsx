@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import BootstrapNavbar from 'react-bootstrap/Navbar'
 import Logo from '../../assets/ACN.svg'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 const Navbar = () => {
   return (
@@ -11,21 +12,23 @@ const Navbar = () => {
       <Container>
         <BootstrapNavbar.Toggle aria-controls="basic-BootstrapNavbar-nav" />
         <BootstrapNavbar.Collapse id="basic-BootstrapNavbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto d-flex align-items-center">
             <Link to="/" className="nav-link">
               <img alt="" src={Logo} width="30" height="30" className="d-inline-block align-top" />{' '}
             </Link>
-            <Link to="/carousel" className="nav-link">
-              Carousel
-            </Link>
-            <Link to="/accordion" className="nav-link">
-              Accordion
+            <Link to="/faq" className="nav-link">
+              FAQ
             </Link>
             <Link to="/users" className="nav-link">
               Users
             </Link>
-            <Link to="/forms" className="nav-link">
-              Forms
+          </Nav>
+          <Nav className="d-flex align-items-center">
+            <Link to="/registration" className="nav-link">
+              Registration
+            </Link>
+            <Link to="/login" className="nav-link">
+              <Button variant="primary">Login</Button>{' '}
             </Link>
           </Nav>
         </BootstrapNavbar.Collapse>

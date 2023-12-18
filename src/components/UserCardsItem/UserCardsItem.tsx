@@ -8,7 +8,11 @@ const UserCardsItem = ({ item }: UserCardsItemProps): JSX.Element => {
   return (
     <Card className="d-flex w-100 mb-4">
       <Card.Header className="text-center py-3">
-        <Image src={avatarUrl} roundedCircle />
+        <Image
+          src={avatarUrl ? avatarUrl : 'https://www.svgrepo.com/show/452030/avatar-default.svg'}
+          style={{ width: '50px', height: '50px' }}
+          roundedCircle
+        />
       </Card.Header>
       <Card.Body>
         <Card.Title>
