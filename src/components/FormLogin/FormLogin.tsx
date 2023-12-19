@@ -7,16 +7,14 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import * as formik from 'formik'
 import * as yup from 'yup'
+import { Link } from 'react-router-dom'
 
 const FormLogin = () => {
   const { Formik } = formik
 
   const schema = yup.object().shape({
-    userName: yup.string().min(2).max(20).required(),
-    password: yup
-      .string()
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/)
-      .required(),
+    email: yup.string().required(),
+    password: yup.string().required(),
   })
 
   const handleSubmit = () => {
@@ -29,22 +27,22 @@ const FormLogin = () => {
         validationSchema={schema}
         onSubmit={handleSubmit}
         initialValues={{
-          userName: '',
+          email: '',
           password: '',
         }}
       >
         {({ handleChange }) => (
           <Form noValidate>
             <Row className="justify-content-center mb-3">
-              <Form.Group as={Col} md="4" controlId="validationFormikUsername">
-                <Form.Label>Username</Form.Label>
+              <Form.Group as={Col} md="4" controlId="validationFormikEmail">
+                <Form.Label>Email</Form.Label>
                 <InputGroup hasValidation>
                   <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                   <Form.Control
                     type="text"
-                    placeholder="Username"
+                    placeholder="Email"
                     aria-describedby="inputGroupPrepend"
-                    name="userName"
+                    name="email"
                     value={''}
                     onChange={handleChange}
                   />
@@ -68,8 +66,13 @@ const FormLogin = () => {
               </Form.Group>
             </Row>
             <Row className="justify-content-center mb-3">
-              <Col md="4" className="text-center">
-                <Button type="submit">Login</Button>
+              <Col md="6" className="text-center">
+                <Button type="submit">Login</Button>{' '}
+                <Button variant="outline-primary">
+                  <Link to="/registration" className="nav-link">
+                    Register
+                  </Link>
+                </Button>
               </Col>
             </Row>
           </Form>
