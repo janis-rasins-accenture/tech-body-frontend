@@ -1,7 +1,6 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
-import InputGroup from 'react-bootstrap/InputGroup'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
@@ -36,19 +35,16 @@ const FormLogin = () => {
             <Row className="justify-content-center mb-3">
               <Form.Group as={Col} md="4" controlId="validationFormikEmail">
                 <Form.Label>Email</Form.Label>
-                <InputGroup hasValidation>
-                  <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                  <Form.Control
-                    type="text"
-                    placeholder="Email"
-                    aria-describedby="inputGroupPrepend"
-                    name="email"
-                    value={''}
-                    onChange={handleChange}
-                  />
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  <Form.Control.Feedback type="invalid">{''}</Form.Control.Feedback>
-                </InputGroup>
+                <Form.Control
+                  type="text"
+                  placeholder="Email"
+                  aria-describedby="inputGroupPrepend"
+                  name="email"
+                  value={''}
+                  onChange={handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{''}</Form.Control.Feedback>
               </Form.Group>
             </Row>
             <Row className="justify-content-center mb-3">
