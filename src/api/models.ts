@@ -17,3 +17,8 @@ export interface CreateUserResponseIF {
     userId: string
   }
 }
+
+export interface LoginUserResponseIF {
+  success: boolean
+  userId: string
+}

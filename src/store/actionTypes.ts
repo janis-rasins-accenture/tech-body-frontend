@@ -5,5 +5,6 @@ export enum ActionTypes {
   SET_SLIDES = 'SET_SLIDES',
   SUBMIT_FORM = 'SUBMIT_FORM',
   ADD_USER = 'ADD_USER',
+  SET_USER_ID = 'SET_USER_ID',
   /* eslint-enable no-unused-vars */
 }

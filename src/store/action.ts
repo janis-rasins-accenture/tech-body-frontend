@@ -8,6 +8,13 @@ export const setUsers = (users: UserIF[]) => {
   }
 }
 
+export const setCurrentUser = (userId: string) => {
+  return {
+    type: ActionTypes.SET_USER_ID,
+    payload: userId,
+  }
+}
+
 export const addUser = (user: UserIF) => {
   return {
     type: ActionTypes.ADD_USER,

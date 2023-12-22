@@ -24,6 +24,17 @@ const reducer = (state: RootState = defaultState, action: PayloadAction<any>): R
         ...state,
         users: action.payload, // Store fetched users data in users state
       }
+    case ActionTypes.SET_USER_ID:
+      return {
+        ...state,
+        currentUser: {
+          userId: action.payload,
+          firstName: '',
+          lastName: '',
+          email: '',
+          userName: '',
+        }, // Store fetched users data in users state
+      }
     case ActionTypes.SET_SLIDES:
       return {
         ...state,

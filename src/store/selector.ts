@@ -8,6 +8,10 @@ export const getCarouselSlides = (state: RootState) => {
   return state.carouselSlides
 }
 
+export const getCurrentUserID = (state: RootState) => {
+  return state.currentUser?.userId
+}
+
 export const getTexts = (state: RootState) => {
   return state.texts
 }

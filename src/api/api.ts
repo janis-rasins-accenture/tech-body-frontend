@@ -1,4 +1,3 @@
-import { BasicUserIF } from '../store/types'
 import { FetchOptionsIF } from './models'
 
 const FETCH_OPTIONS: FetchOptionsIF = {
@@ -29,8 +28,7 @@ export const processError = (error: any) => {
   throw new Error(JSON.stringify(error))
 }
 
-export const createData = (userData: BasicUserIF) => {
-  console.log('createData()', userData)
-  const fetchOptions = { ...FETCH_OPTIONS, method: 'POST', body: JSON.stringify(userData) }
+export const postData = (body: string) => {
+  const fetchOptions = { ...FETCH_OPTIONS, body }
   return fetchOptions
 }

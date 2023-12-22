@@ -12,15 +12,20 @@ export interface BasicUserIF {
   email: string
   avatarUrl?: string
   userName: string
-  password: string
 }
 
 export interface UserFormValues extends BasicUserIF {
   confirmPassword: string
+  password: string
 }
 
 export interface UserIF extends BasicUserIF {
   userId: string
+}
+
+export interface UserAuthIF {
+  email: string
+  password: string
 }
 
 export interface Text {
