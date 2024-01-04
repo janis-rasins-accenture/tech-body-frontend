@@ -7,12 +7,19 @@ import Col from 'react-bootstrap/Col'
 import * as formik from 'formik'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
-import { UserAuthIF } from '../../store/types'
+import { LoginStatusIF, UserAuthIF } from '../../store/types'
 import { FormikHelpers } from 'formik'
 import { loginUser } from '../../api/authApi'
+import { fetchCurrentUser } from '../../api/usersApi'
+import { setLoginStatus, setLoginUserData } from '../../store/action'
+import processStandardError from '../../utils/processError'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const FormLogin = () => {
   const { Formik } = formik
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const schema = yup.object().shape({
     email: yup.string().required(),
@@ -28,6 +35,24 @@ const FormLogin = () => {
     resetForm()
     loginUser(values).then((response) => {
       console.log(response)
+      if (response.success) {
+        console.log(response.userId)
+        fetchCurrentUser(response.userId)
+          .then((data) => {
+            console.log('Set LogedIn user data:', data.data[0])
+            dispatch(setLoginUserData(data.data[0]))
+          })
+          .then(() => {
+            const updatedLoginStatus: LoginStatusIF = { loggedInStatus: true }
+            dispatch(setLoginStatus(updatedLoginStatus))
+          })
+          .catch((error) => {
+            processStandardError(error)
+          })
+          .then(() => {
+            navigate('/')
+          })
+      }
     })
   }
 

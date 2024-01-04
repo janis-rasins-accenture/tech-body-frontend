@@ -12,6 +12,14 @@ export const getCurrentUserID = (state: RootState) => {
   return state.currentUser?.userId
 }
 
+export const getLogedInUser = (state: RootState) => {
+  return state.userLogedIn
+}
+
+export const getLoggedInStatus = (state: RootState) => {
+  return state.loggedInStatus
+}
+
 export const getTexts = (state: RootState) => {
   return state.texts
 }

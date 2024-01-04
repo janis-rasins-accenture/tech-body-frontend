@@ -3,6 +3,9 @@ import { ActionTypes } from './actionTypes'
 import { RootState } from './types'
 
 const defaultState = {
+  loggedInStatus: {
+    loggedInStatus: false,
+  },
   texts: [
     {
       isActive: false,
@@ -35,6 +38,12 @@ const reducer = (state: RootState = defaultState, action: PayloadAction<any>): R
           userName: '',
         }, // Store fetched users data in users state
       }
+    case ActionTypes.SET_USER:
+      console.log(', reducer.ts, SET_USER', action.payload)
+      return {
+        ...state,
+        userLogedIn: action.payload,
+      }
     case ActionTypes.SET_SLIDES:
       return {
         ...state,
@@ -49,6 +58,11 @@ const reducer = (state: RootState = defaultState, action: PayloadAction<any>): R
       return {
         ...state,
         currentUser: action.payload,
+      }
+    case ActionTypes.SET_LOGIN_STATUS:
+      return {
+        ...state,
+        loggedInStatus: action.payload,
       }
     default:
       return state

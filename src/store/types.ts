@@ -4,6 +4,8 @@ export interface RootState {
   carouselSlides?: CarouselSlidesModel[]
   values?: BasicUserIF
   currentUser?: UserIF
+  userLogedIn?: UserIF
+  loggedInStatus: LoginStatusIF
 }
 
 export interface BasicUserIF {
@@ -19,6 +21,12 @@ export interface UserFormValues extends BasicUserIF {
   password: string
 }
 
+export interface PasswordFormValues {
+  oldPassword: string
+  confirmPassword: string
+  password: string
+}
+
 export interface UserIF extends BasicUserIF {
   userId: string
 }
@@ -26,6 +34,10 @@ export interface UserIF extends BasicUserIF {
 export interface UserAuthIF {
   email: string
   password: string
+}
+
+export interface LoginStatusIF {
+  loggedInStatus: boolean
 }
 
 export interface Text {
