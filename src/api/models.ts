@@ -22,3 +22,9 @@ export interface LoginUserResponseIF {
   success: boolean
   userId: string
 }
+
+export interface ResponseIF<T> {
+  message: string
+  success: boolean
+  data?: T
+}
