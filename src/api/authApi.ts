@@ -1,8 +1,16 @@
-import { UserAuthIF } from '../store/types'
-import { API_URL, STAGE, postData } from './api'
-import { LoginUserResponseIF } from './models'
+import { ResponseIF } from './models'
+import { UserAuthIF, UserIF } from '../store/types'
+import { callService } from './api'
 
-export async function loginUser(loginData: UserAuthIF): Promise<LoginUserResponseIF> {
-  const options = postData(JSON.stringify(loginData))
-  return fetch(`${API_URL}/${STAGE}/login`, options).then((response) => response.json())
+const authAPI = {
+  async loginUser(loginData: UserAuthIF): Promise<ResponseIF<UserIF>> {
+    const response = await callService<UserIF>('post', 'login', loginData)
+    return response
+  },
+  async logoutUser() {
+    const response = await callService('post', 'logout')
+    return response
+  },
 }
+
+export default authAPI
