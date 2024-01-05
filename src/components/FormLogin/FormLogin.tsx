@@ -49,7 +49,7 @@ const FormLogin = () => {
           .catch((error) => {
             processStandardError(error)
           })
-          .then(() => {
+          .finally(() => {
             navigate('/')
           })
       }

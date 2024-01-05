@@ -39,7 +39,7 @@ const ChangePassword = () => {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationFormik04">
+            <Form.Group as={Col} md="6" controlId="validationFormik05">
               <Form.Label>New password</Form.Label>
               <Form.Control
                 type="password"
@@ -53,7 +53,7 @@ const ChangePassword = () => {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationFormik05">
+            <Form.Group as={Col} md="6" controlId="validationFormik06">
               <Form.Label>Confirm new password</Form.Label>
               <Form.Control
                 type="password"
