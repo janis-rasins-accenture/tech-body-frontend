@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { getUsers } from '../../store/selector'
-import { fetchUsers } from '../../api/usersApi'
+import usersAPI from '../../api/usersApi'
 import { setUsers } from '../../store/action'
 import { RootState, UserIF } from '../../store/types'
 import UserCards from './UserCards'
@@ -14,9 +14,12 @@ const UserContainer = ({ users }: { users: UserIF[] | undefined }) => {
   React.useEffect(() => {
     console.log('Users: ', !users?.length)
     if (!users?.length) {
-      fetchUsers()
+      usersAPI
+        .getUsers()
         .then((data) => {
-          dispatch(setUsers(data.data))
+          if (data.data) {
+            dispatch(setUsers(data.data))
+          }
         })
         .catch((error) => {
           processStandardError(error)
