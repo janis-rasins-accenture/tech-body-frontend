@@ -9,8 +9,8 @@ import * as yup from 'yup'
 import { Link } from 'react-router-dom'
 import { LoginStatusIF, UserAuthIF } from '../../store/types'
 import { FormikHelpers } from 'formik'
-import { loginUser } from '../../api/authApi'
-import { fetchCurrentUser } from '../../api/usersApi'
+import authAPI from '../../api/authApi'
+import usersAPI from '../../api/usersApi'
 import { setLoginStatus, setLoginUserData } from '../../store/action'
 import processStandardError from '../../utils/processError'
 import { useDispatch } from 'react-redux'
@@ -33,25 +33,30 @@ const FormLogin = () => {
     console.log('Login', values)
     setSubmitting(false)
     resetForm()
-    loginUser(values).then((response) => {
+    authAPI.loginUser(values).then((response) => {
       console.log(response)
       if (response.success) {
-        console.log(response.userId)
-        fetchCurrentUser(response.userId)
-          .then((data) => {
-            console.log('Set LogedIn user data:', data.data[0])
-            dispatch(setLoginUserData(data.data[0]))
-          })
-          .then(() => {
-            const updatedLoginStatus: LoginStatusIF = { loggedInStatus: true }
-            dispatch(setLoginStatus(updatedLoginStatus))
-          })
-          .catch((error) => {
-            processStandardError(error)
-          })
-          .finally(() => {
-            navigate('/')
-          })
+        if (response.data) {
+          console.log(response.data.userId)
+          usersAPI
+            .getUser(response.data.userId)
+            .then((data) => {
+              console.log('Set LogedIn user data:', data)
+              if (data.data) {
+                dispatch(setLoginUserData(data.data))
+              }
+            })
+            .then(() => {
+              const updatedLoginStatus: LoginStatusIF = { loggedInStatus: true }
+              dispatch(setLoginStatus(updatedLoginStatus))
+            })
+            .catch((error) => {
+              processStandardError(error)
+            })
+            .finally(() => {
+              navigate('/')
+            })
+        }
       }
     })
   }

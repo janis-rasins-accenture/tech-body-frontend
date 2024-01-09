@@ -1,6 +1,6 @@
 import React from 'react'
 import { addUser, submitForm } from '../../store/action'
-import { createUser } from '../../api/usersApi'
+import usersAPI from '../../api/usersApi'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
@@ -20,12 +20,12 @@ const FormsContainer = ({ submitForm }: any) => {
     try {
       console.log(values)
       dispatch(submitForm(values))
-      const response = await createUser(values)
+      const response = await usersAPI.createUser(values)
 
-      if (response && response.data && response.data.userId) {
+      if (response && response.data && response.data.data.userId) {
         const user: UserIF = {
           ...values,
-          userId: response.data.userId,
+          userId: response.data.data.userId,
         }
         dispatch(addUser(user))
       } else {

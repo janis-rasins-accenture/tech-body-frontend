@@ -1,6 +1,6 @@
-import { UserIF } from '../store/types'
+import { BasicUserIF, UserIF } from '../store/types'
 import { callService } from './api'
-import { ResponseIF } from './models'
+import { CreateUserResponseIF, ResponseIF } from './models'
 
 // export async function fetchUsers() {
 //   const options = getData()
@@ -22,7 +22,8 @@ import { ResponseIF } from './models'
 
 // export async function createUser(userData: BasicUserIF): Promise<CreateUserResponseIF> {
 //   const options = postData(JSON.stringify(userData))
-//   return fetch(`${API_URL}/${STAGE}/users`, options).then((response) => response.json())
+//   return fetch(`${API_URL}/${STAGE}/users`, options)
+//     .then((response) => response.json())
 // }
 
 // export async function logoutUser(): Promise<void> {
@@ -37,11 +38,15 @@ import { ResponseIF } from './models'
 
 const usersAPI = {
   async getUser(userId: string): Promise<ResponseIF<UserIF>> {
-    const response = await callService<UserIF>('post', `users/${userId}`)
+    const response = await callService<UserIF>('POST', `users/${userId}`)
     return response
   },
   async getUsers(): Promise<ResponseIF<UserIF[]>> {
     const response = await callService<UserIF[]>('GET', `users`)
+    return response
+  },
+  async createUser(userData: BasicUserIF): Promise<ResponseIF<CreateUserResponseIF>> {
+    const response = await callService<CreateUserResponseIF>('POST', `users`, userData)
     return response
   },
 }

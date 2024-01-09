@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCarouselSlides } from '../../store/selector'
-import { fetchCarouselSlides } from '../../api/slidesApi'
+import slidesAPI from '../../api/slidesApi'
 import { setCarouselSlides } from '../../store/action'
 import { CarouselSlidesModel } from '../../store/types'
 import CarouselExample from './CarouselExample'
@@ -13,9 +13,12 @@ const CarouselContainer = () => {
 
   React.useEffect(() => {
     if (!carouselSlides) {
-      fetchCarouselSlides()
+      slidesAPI
+        .getSlides()
         .then((data) => {
-          dispatch(setCarouselSlides(data.data))
+          if (data.data) {
+            dispatch(setCarouselSlides(data.data))
+          }
         })
         .catch((error) => {
           processStandardError(error)

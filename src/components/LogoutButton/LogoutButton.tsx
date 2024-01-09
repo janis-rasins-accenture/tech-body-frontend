@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
-import { logoutUser } from '../../api/usersApi'
+import authAPI from '../../api/authApi'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setLoginStatus } from '../../store/action'
@@ -11,12 +11,13 @@ const LogoutButton = () => {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
-    logoutUser()
+    authAPI
+      .logoutUser()
       .then(() => {
         const updatedLoginStatus: LoginStatusIF = { loggedInStatus: false }
         dispatch(setLoginStatus(updatedLoginStatus))
       })
-      .then(() => {
+      .finally(() => {
         navigate('/')
       })
   }
