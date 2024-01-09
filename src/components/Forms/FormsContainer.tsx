@@ -7,22 +7,22 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Container from 'react-bootstrap/Container'
-import { UserFormValues, UserIF } from '../../store/types'
 import * as formik from 'formik'
 import { connect, useDispatch } from 'react-redux'
 import { schema } from './validation'
+import { CreateUserIF, UserIF } from '../../types/users'
 
 const FormsContainer = ({ submitForm }: any) => {
   const { Formik } = formik
   const dispatch = useDispatch()
 
-  const handleSubmit = async (values: UserFormValues, { resetForm }: any) => {
+  const handleSubmit = async (values: CreateUserIF, { resetForm }: any) => {
     try {
       console.log(values)
       dispatch(submitForm(values))
       const response = await usersAPI.createUser(values)
 
-      if (response && response.data && response.data.data.userId) {
+      if (response.data?.data?.userId) {
         const user: UserIF = {
           ...values,
           userId: response.data.data.userId,

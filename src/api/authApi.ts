@@ -1,6 +1,6 @@
 import { ResponseIF } from './models'
-import { UserAuthIF, UserIF } from '../store/types'
 import { callService } from './api'
+import { UserAuthIF, UserIF } from '../types/users'
 
 const authAPI = {
   async loginUser(loginData: UserAuthIF): Promise<ResponseIF<UserIF>> {

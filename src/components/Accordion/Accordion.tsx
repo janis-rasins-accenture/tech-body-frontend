@@ -2,9 +2,10 @@ import React from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import { useSelector } from 'react-redux'
 import { getTexts } from '../../store/selector'
+import { Text } from '../../types/text'
 
 const CustomAccordion = (): React.JSX.Element | null => {
-  const texts = useSelector(getTexts)
+  const texts: Text[] = useSelector(getTexts)
   const [activeItem, setActiveItem] = React.useState('0')
   React.useEffect(() => {
     if (!texts?.length) {

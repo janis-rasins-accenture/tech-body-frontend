@@ -1,6 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { ActionTypes } from './actionTypes'
-import { RootState } from './types'
 
 const defaultState = {
   loggedInStatus: {
@@ -20,7 +19,7 @@ const defaultState = {
   ],
 }
 
-const reducer = (state: RootState = defaultState, action: PayloadAction<any>): RootState => {
+const reducer = (state = defaultState, action: PayloadAction<any>) => {
   switch (action.type) {
     case ActionTypes.SET_USERS:
       return {

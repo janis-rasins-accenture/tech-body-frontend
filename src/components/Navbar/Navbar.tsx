@@ -5,15 +5,10 @@ import BootstrapNavbar from 'react-bootstrap/Navbar'
 import Logo from '../../assets/ACN.svg'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import LogoutButton from '../LogoutButton/LogoutButton'
-import { LoginStatusIF, UserIF } from '../../store/types'
-import { useSelector } from 'react-redux'
-import { getLoggedInStatus, getLogedInUser } from '../../store/selector'
+import { UserIF } from '../../types/users'
 
-const Navbar = () => {
-  const loggedInStatus: LoginStatusIF | undefined = useSelector(getLoggedInStatus)
-  const userLogedIn: UserIF | undefined = useSelector(getLogedInUser)
-
+const Navbar = ({ user }: { user: UserIF }) => {
+  const isLoggedIn = Object.keys(user).length
   return (
     <BootstrapNavbar expand="lg" className="bg-body-tertiary mb-4">
       <Container>
@@ -26,29 +21,28 @@ const Navbar = () => {
             <Link to="/faq" className="nav-link">
               FAQ
             </Link>
-            {loggedInStatus.loggedInStatus ? (
+            {isLoggedIn ? (
               <Link to="/users" className="nav-link">
                 Users
               </Link>
             ) : null}
           </Nav>
           <Nav className="d-flex align-items-center">
-            {!loggedInStatus.loggedInStatus ? (
+            {!isLoggedIn ? (
               <Link to="/registration" className="nav-link">
                 Registration
               </Link>
             ) : null}
-            {loggedInStatus.loggedInStatus && userLogedIn ? (
+            {isLoggedIn ? (
               <Link to="/account" className="nav-link">
-                Hello, {userLogedIn.firstName} {userLogedIn.lastName}
+                Hello, {user.firstName} {user.lastName}
               </Link>
             ) : null}
-            {!loggedInStatus.loggedInStatus ? (
+            {!isLoggedIn ? (
               <Link to="/login" className="nav-link">
                 <Button variant="primary">Login</Button>{' '}
               </Link>
             ) : null}
-            {loggedInStatus.loggedInStatus ? <LogoutButton /> : null}
           </Nav>
         </BootstrapNavbar.Collapse>
       </Container>

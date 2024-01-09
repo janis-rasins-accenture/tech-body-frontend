@@ -1,4 +1,4 @@
-import { BasicUserIF, UserIF } from '../store/types'
+import { BasicUserIF, UserIF } from '../types/users'
 import { callService } from './api'
 import { CreateUserResponseIF, ResponseIF } from './models'
 

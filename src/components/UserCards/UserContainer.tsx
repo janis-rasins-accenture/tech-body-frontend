@@ -3,9 +3,10 @@ import { connect, useDispatch } from 'react-redux'
 import { getUsers } from '../../store/selector'
 import usersAPI from '../../api/usersApi'
 import { setUsers } from '../../store/action'
-import { RootState, UserIF } from '../../store/types'
 import UserCards from './UserCards'
 import processStandardError from '../../utils/processError'
+import { RootState } from '../../store/store'
+import { UserIF } from '../../types/users'
 
 const UserContainer = ({ users }: { users: UserIF[] | undefined }) => {
   console.log('Render users!')
