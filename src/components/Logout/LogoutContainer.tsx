@@ -1,22 +1,22 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import authAPI from '../../api/authApi'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setLoginStatus } from '../../store/action'
-import { LoginStatusIF } from '../../store/types'
+import { compose } from '@reduxjs/toolkit'
+import withAuthRedirect from '../hoc/withAuthRedirect'
+import { resetProfile } from '../Profile/profileSlice'
 
-const LogoutButton = () => {
+const LogoutContainer = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
   const handleLogout = () => {
     authAPI
       .logoutUser()
       .then(() => {
-        const updatedLoginStatus: LoginStatusIF = { loggedInStatus: false }
-        dispatch(setLoginStatus(updatedLoginStatus))
+        dispatch(resetProfile())
       })
+      .catch((error) => console.log('Logout error', error))
       .finally(() => {
         navigate('/')
       })
@@ -29,4 +29,4 @@ const LogoutButton = () => {
   )
 }
 
-export default LogoutButton
+export default compose(withAuthRedirect)(LogoutContainer)

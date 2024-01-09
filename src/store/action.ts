@@ -1,5 +1,6 @@
+import { BasicUserIF, UserIF } from '../types/users'
 import { ActionTypes } from './actionTypes'
-import { UserIF, BasicUserIF, CarouselSlidesModel, LoginStatusIF } from './types'
+import { CarouselSlidesModel } from './types'
 
 export const setUsers = (users: UserIF[]) => {
   return {
@@ -42,13 +43,5 @@ export const submitForm = (userData: BasicUserIF) => {
   return {
     type: ActionTypes.SUBMIT_FORM,
     payload: userData,
-  }
-}
-
-export const setLoginStatus = (loggedInStatus: LoginStatusIF) => {
-  console.log('setLoginStatus', loggedInStatus)
-  return {
-    type: ActionTypes.SET_LOGIN_STATUS,
-    payload: loggedInStatus,
   }
 }

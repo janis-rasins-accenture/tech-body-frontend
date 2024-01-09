@@ -1,4 +1,4 @@
-import { Text } from '../../store/types'
+import { Text } from '../../types/text'
 export interface CustomAccordionProps {
   texts: Text[]
 }

@@ -1,4 +1,4 @@
-import { UserIF } from '../../store/types'
+import { UserIF } from '../../types/users'
 
 export interface UserCardsItemProps {
   item: UserIF
