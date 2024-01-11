@@ -1,19 +1,17 @@
 import React from 'react'
-import { connect, useDispatch } from 'react-redux'
-import { getUsers } from '../../store/selector'
-import usersAPI from '../../api/usersApi'
-import { setUsers } from '../../store/action'
+import { useDispatch, useSelector } from 'react-redux'
 import UserCards from './UserCards'
-import processStandardError from '../../utils/processError'
 import { RootState } from '../../store/store'
 import { UserIF } from '../../types/users'
+import usersAPI from '../../api/usersApi'
+import { setUsers } from './usersSlice'
+import { ResponseIF } from '../../api/models'
 
-const UserContainer = ({ users }: { users: UserIF[] | undefined }) => {
-  console.log('Render users!')
+const UserContainer = () => {
+  const users: UserIF[] | undefined = useSelector((state: RootState) => state.users.users)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    console.log('Users: ', !users?.length)
     if (!users?.length) {
       usersAPI
         .getUsers()
@@ -22,16 +20,12 @@ const UserContainer = ({ users }: { users: UserIF[] | undefined }) => {
             dispatch(setUsers(data.data))
           }
         })
-        .catch((error) => {
-          processStandardError(error)
+        .catch((error: ResponseIF<undefined>) => {
+          console.log('Fetch users error: ', error)
         })
     }
   }, [users, dispatch])
-  return users?.length ? <UserCards users={users} /> : null
+  return Object.keys(users) ? <UserCards users={users} /> : null
 }
 
-const mapStateToProps = (state: RootState) => ({
-  users: getUsers(state),
-})
-
-export default connect(mapStateToProps, {})(UserContainer)
+export default UserContainer

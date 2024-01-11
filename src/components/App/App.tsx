@@ -1,10 +1,10 @@
 import React from 'react'
-import CustomAccordion from '../Accordion/Accordion'
+import AccordionContainer from '../Accordion/AccordionContainer'
 import CarouselContainer from '../CarouselExample/CarouselContainer'
 import Container from 'react-bootstrap/Container'
 import { Route, Routes } from 'react-router-dom'
 import UserContainer from '../UserCards/UserContainer'
-import FormsContainer from '../Forms/FormsContainer'
+import CreateNewUserContainer from '../CreateUser/CreateNewUserContainer'
 import LoginContainer from '../Login/LoginContainer'
 import ProfileContainer from '../Profile/ProfileContainer'
 import LogoutContainer from '../Logout/LogoutContainer'
@@ -17,8 +17,8 @@ const App = (): React.JSX.Element => {
       <Routes>
         <Route path="/" element={<CarouselContainer />} />
         <Route path="/users" element={<UserContainer />} />
-        <Route path="/faq" element={<CustomAccordion />} />
-        <Route path="/registration" element={<FormsContainer />} />
+        <Route path="/faq" element={<AccordionContainer />} />
+        <Route path="/registration" element={<CreateNewUserContainer />} />
         <Route path="/profile" element={<ProfileContainer />} />
         <Route path="/login" element={<LoginContainer />} />
         <Route path="/logout" element={<LogoutContainer />} />

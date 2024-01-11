@@ -1,4 +1,4 @@
-export interface CarouselSlidesModel {
+export interface CarouselSlidesIF {
   title: string
   link: string
   description: string

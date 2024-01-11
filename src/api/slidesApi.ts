@@ -1,4 +1,4 @@
-import { CarouselSlidesModel } from '../store/types'
+import { CarouselSlidesIF } from '../types/slides'
 import { callService } from './api'
 import { ResponseIF } from './models'
 
@@ -12,8 +12,8 @@ import { ResponseIF } from './models'
 // }
 
 const slidesAPI = {
-  async getSlides(): Promise<ResponseIF<CarouselSlidesModel[]>> {
-    const response = await callService<CarouselSlidesModel[]>('GET', `carouselSlides`)
+  async getSlides(): Promise<ResponseIF<CarouselSlidesIF[]>> {
+    const response = await callService<CarouselSlidesIF[]>('GET', `carouselSlides`)
     return response
   },
 }

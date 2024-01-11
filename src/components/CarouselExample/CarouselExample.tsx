@@ -5,7 +5,7 @@ import { CustomCarouselProps } from './models'
 
 const CarouseExample = (props: CustomCarouselProps): JSX.Element => {
   const itemRender = (): JSX.Element[] => {
-    return props.carouselSlides?.map((item, index) => {
+    return props.slides?.map((item, index) => {
       return (
         <Carousel.Item key={`custom-carousel-${index.toString()}`}>
           <CarouselItemExample item={item} />
@@ -18,7 +18,7 @@ const CarouseExample = (props: CustomCarouselProps): JSX.Element => {
     })
   }
 
-  return props.carouselSlides?.length ? <Carousel>{itemRender()}</Carousel> : <></>
+  return props.slides?.length ? <Carousel>{itemRender()}</Carousel> : <></>
 }
 
 export default CarouseExample

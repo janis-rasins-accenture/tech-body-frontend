@@ -12,10 +12,7 @@ export interface FetchOptionsIF {
 }
 
 export interface CreateUserResponseIF {
-  message: string
-  data: {
-    userId: string
-  }
+  userId: string
 }
 
 export interface LoginUserResponseIF {

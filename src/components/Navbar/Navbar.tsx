@@ -6,6 +6,7 @@ import Logo from '../../assets/ACN.svg'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import { UserIF } from '../../types/users'
+import LogoutContainer from '../Logout/LogoutContainer'
 
 const Navbar = ({ user }: { user: UserIF }) => {
   const isLoggedIn = Object.keys(user).length
@@ -34,7 +35,7 @@ const Navbar = ({ user }: { user: UserIF }) => {
               </Link>
             ) : null}
             {isLoggedIn ? (
-              <Link to="/account" className="nav-link">
+              <Link to="/profile" className="nav-link">
                 Hello, {user.firstName} {user.lastName}
               </Link>
             ) : null}
@@ -43,6 +44,7 @@ const Navbar = ({ user }: { user: UserIF }) => {
                 <Button variant="primary">Login</Button>{' '}
               </Link>
             ) : null}
+            {isLoggedIn ? <LogoutContainer /> : null}
           </Nav>
         </BootstrapNavbar.Collapse>
       </Container>

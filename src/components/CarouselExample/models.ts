@@ -1,9 +1,9 @@
-import { CarouselSlidesModel } from '../../store/types'
+import { CarouselSlidesIF } from '../../types/slides'
 
 export interface CustomCarouselProps {
-  carouselSlides: CarouselSlidesModel[]
+  slides: CarouselSlidesIF[]
 }
 
 export interface CarouselItemExampleProps {
-  item: CarouselSlidesModel
+  item: CarouselSlidesIF
 }

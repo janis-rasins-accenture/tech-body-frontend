@@ -1,4 +1,4 @@
-import { Text } from '../../types/text'
+import { TextsIF } from '../../types/texts'
 export interface CustomAccordionProps {
-  texts: Text[]
+  texts: TextsIF[]
 }
