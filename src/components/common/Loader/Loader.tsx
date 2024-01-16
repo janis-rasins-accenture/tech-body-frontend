@@ -2,7 +2,11 @@ import React from 'react'
 import styles from './Loader.module.css'
 
 const Loader = () => {
-  return <span className={styles.loader} />
+  return (
+    <div className={styles.loaderWrapper}>
+      <span className={styles.loader} />
+    </div>
+  )
 }
 
 export default Loader

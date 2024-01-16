@@ -6,6 +6,7 @@ import { setSlides } from './slidesSlice'
 import { CarouselSlidesIF } from '../../types/slides'
 import CarouselExample from './CarouselExample'
 import processStandardError from '../../utils/processError'
+import { resetAlert } from '../common/Alert/alertSlice'
 
 const CarouselContainer = () => {
   const slides: CarouselSlidesIF[] | undefined = useSelector(
@@ -14,6 +15,7 @@ const CarouselContainer = () => {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
+    dispatch(resetAlert())
     if (!slides?.length) {
       slidesAPI
         .getSlides()

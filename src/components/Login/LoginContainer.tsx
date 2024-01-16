@@ -10,6 +10,8 @@ import { setLoginError, setProfile } from '../Profile/profileSlice'
 import { UserAuthIF, UserIF } from '../../types/users'
 import { ResponseIF } from '../../api/models'
 import { CustomFormIF } from '../common/CustomForm/models'
+import { resetAlert, setAlert } from '../common/Alert/alertSlice'
+import { AlertEnum } from '../common/Alert/models'
 
 const LoginContainer = () => {
   const { loginError, profile } = useSelector((state: RootState) => state.profile)
@@ -20,10 +22,11 @@ const LoginContainer = () => {
   const from = location.state?.from?.pathname || '/'
 
   React.useEffect(() => {
+    dispatch(resetAlert())
     if (Object.keys(profile).length) {
       navigate(from, { replace: true })
     }
-  }, [loginError, profile, from, navigate])
+  }, [loginError, profile, from, navigate, resetAlert])
 
   const submitLogin = (values: UserAuthIF) => {
     dispatch(setLoading(true))
@@ -40,6 +43,7 @@ const LoginContainer = () => {
       .catch((error: ResponseIF<undefined>) => {
         console.log('Login error: ', error)
         dispatch(setLoginError(error.message))
+        dispatch(setAlert({ message: error.message, variant: AlertEnum.DANGER }))
       })
       .finally(() => {
         dispatch(setLoading(false))

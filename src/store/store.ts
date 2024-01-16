@@ -4,7 +4,8 @@ import profileReducer from '../components/Profile/profileSlice'
 import usersReducer from '../components/UserCards/usersSlice'
 import slidesReducer from '../components/CarouselExample/slidesSlice'
 import textsReducer from '../components/Accordion/textsSlice'
-import createUserReducer from '../components/CreateUser/newUsersSlice'
+import alertReducer from '../components/common/Alert/alertSlice'
+import postsReducer from '../components/Posts/postsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     users: usersReducer,
     slides: slidesReducer,
     texts: textsReducer,
-    newUser: createUserReducer,
+    alert: alertReducer,
+    posts: postsReducer,
   },
 })
 

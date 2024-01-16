@@ -23,6 +23,7 @@ export function callService<T>(method: Method, url: string, data?: object): Prom
             error.response.data
           )}, headers: ${JSON.stringify(error.response.headers)}`
         )
+        throw error.response.data
       } else if (error.request) {
         // Log no response
         console.log(`Failed to call BFT. Request: ${JSON.stringify(error.request)}`)

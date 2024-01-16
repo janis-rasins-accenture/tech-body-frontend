@@ -9,7 +9,6 @@ interface CreateNewUserProps {
   validationSchema: Yup.ObjectSchema<CreateUserIF>
   formFields: CustomFormIF[]
   initialValues: CreateUserIF
-  // eslint-disable-next-line no-unused-vars
   submitCreateNewUser: (values: CreateUserIF) => void
 }
 
@@ -22,7 +21,6 @@ const CreateNewUser = ({
   const handleSubmit = (values: CreateUserIF, actions: FormikHelpers<CreateUserIF>) => {
     actions.setSubmitting(false)
     submitCreateNewUser(values)
-    actions.resetForm()
   }
   return (
     <Formik

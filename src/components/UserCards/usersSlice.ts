@@ -12,6 +12,9 @@ export const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
+    setUser: (state, action: PayloadAction<UserIF>) => {
+      state.user = action.payload
+    },
     setUsers: (state, action: PayloadAction<UserIF[]>) => {
       state.users = action.payload
     },
@@ -21,6 +24,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { setUsers, setExpireTimestamp } = userSlice.actions
+export const { setUser, setUsers, setExpireTimestamp } = userSlice.actions
 
 export default userSlice.reducer

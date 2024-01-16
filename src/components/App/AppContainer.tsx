@@ -6,7 +6,13 @@ import App from './App'
 
 const AppContainer = (): React.JSX.Element => {
   const isLoading = useSelector((state: RootState) => state.isLoading.state)
-  return isLoading ? <Loader /> : <App />
+
+  return (
+    <>
+      {isLoading ? <Loader /> : null}
+      <App />
+    </>
+  )
 }
 
 export default AppContainer

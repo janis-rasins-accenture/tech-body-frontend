@@ -27,6 +27,11 @@ const Navbar = ({ user }: { user: UserIF }) => {
                 Users
               </Link>
             ) : null}
+            {isLoggedIn ? (
+              <Link to="/posts" className="nav-link">
+                Posts
+              </Link>
+            ) : null}
           </Nav>
           <Nav className="d-flex align-items-center">
             {!isLoggedIn ? (
