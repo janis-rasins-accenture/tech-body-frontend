@@ -1,4 +1,4 @@
-import { ResponseIF } from './models'
+import { AuthResponseIF, ResponseIF } from './models'
 import { callService } from './api'
 import { UserAuthIF, UserIF } from '../types/users'
 
@@ -9,6 +9,10 @@ const authAPI = {
   },
   async logoutUser() {
     const response = await callService('post', 'logout')
+    return response
+  },
+  async isAuth(): Promise<ResponseIF<AuthResponseIF>> {
+    const response = await callService<AuthResponseIF>('get', 'auth')
     return response
   },
 }

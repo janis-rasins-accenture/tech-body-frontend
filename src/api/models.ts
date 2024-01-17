@@ -1,3 +1,5 @@
+import { UserIF } from '../types/users'
+
 export interface FetchOptionsIF {
   method: string
   mode: RequestMode
@@ -24,4 +26,10 @@ export interface ResponseIF<T> {
   message: string
   success: boolean
   data?: T
+}
+
+export interface AuthResponseIF {
+  userId: string
+  expireTimestamp: number
+  user: UserIF
 }

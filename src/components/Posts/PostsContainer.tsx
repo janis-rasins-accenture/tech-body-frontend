@@ -6,15 +6,14 @@ import Posts from './Posts'
 import { ResponseIF } from '../../api/models'
 import postsAPI from '../../api/postsApi'
 import { setPosts } from './postsSlice'
-import { useNavigate } from 'react-router-dom'
+import withAuthRedirect from '../hoc/withAuthRedirect'
+import { compose } from '@reduxjs/toolkit'
 
 const PostsContainer = () => {
   const posts: PostIF[] | undefined = useSelector((state: RootState) => state.posts.posts)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   React.useEffect(() => {
-    dispatch(resetAlert())
     if (!posts?.length) {
       postsAPI
         .getPosts()
@@ -26,15 +25,9 @@ const PostsContainer = () => {
         .catch((error: ResponseIF<undefined>) => {
           console.log('Fetch posts error: ', error)
         })
-        .finally(() => {
-          navigate('/')
-        })
     }
-  }, [posts, dispatch, resetAlert])
+  }, [posts, dispatch])
   return Object.keys(posts) ? <Posts posts={posts} /> : null
 }
 
-export default PostsContainer
-function resetAlert(): any {
-  throw new Error('Function not implemented.')
-}
+export default compose(withAuthRedirect)(PostsContainer)

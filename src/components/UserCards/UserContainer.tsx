@@ -6,12 +6,12 @@ import { UserIF } from '../../types/users'
 import usersAPI from '../../api/usersApi'
 import { setUsers } from './usersSlice'
 import { ResponseIF } from '../../api/models'
-import { useNavigate } from 'react-router-dom'
+import { compose } from '@reduxjs/toolkit'
+import withAuthRedirect from '../hoc/withAuthRedirect'
 
 const UserContainer = () => {
   const users: UserIF[] | undefined = useSelector((state: RootState) => state.users.users)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   React.useEffect(() => {
     if (!users?.length) {
@@ -25,12 +25,9 @@ const UserContainer = () => {
         .catch((error: ResponseIF<undefined>) => {
           console.log('Fetch users error: ', error)
         })
-        .finally(() => {
-          navigate('/')
-        })
     }
   }, [users, dispatch])
   return Object.keys(users) ? <UserCards users={users} /> : null
 }
 
-export default UserContainer
+export default compose(withAuthRedirect)(UserContainer)

@@ -5,9 +5,11 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import { UserIF } from '../../types/users'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
+import { compose } from '@reduxjs/toolkit'
+import withAuthRedirect from '../hoc/withAuthRedirect'
 
 const ProfileContainer = () => {
-  const user: UserIF | undefined = useSelector((state: RootState) => state.profile.profile)
+  const user: UserIF = useSelector((state: RootState) => state.profile.profile)
 
   return Object.keys(user).length ? (
     <Container>
@@ -18,4 +20,4 @@ const ProfileContainer = () => {
   ) : null
 }
 
-export default ProfileContainer
+export default compose(withAuthRedirect)(ProfileContainer)

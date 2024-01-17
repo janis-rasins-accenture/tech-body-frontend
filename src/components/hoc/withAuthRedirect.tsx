@@ -1,18 +1,40 @@
 import React from 'react'
-import { useLocation, Navigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import { UserIF } from '../../types/users'
+import authAPI from '../../api/authApi'
+import { setExpireTimestamp, setProfile } from '../Profile/profileSlice'
+import { setLoading } from '../common/Loader/loaderSlice'
 
 function withAuthRedirect(WrappedComponent: React.ComponentType) {
   const RedirectComponent: React.FC = () => {
-    const user: UserIF | undefined = useSelector((state: RootState) => state.profile.profile)
-    const location = useLocation()
-    return Object.keys(user).length ? (
-      <WrappedComponent />
-    ) : (
-      <Navigate to="/login" state={{ from: location }} replace={true} />
-    )
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const user: UserIF = useSelector((state: RootState) => state.profile.profile)
+
+    React.useEffect(() => {
+      if (user.userId) {
+        return
+      }
+      dispatch(setLoading(true))
+      authAPI
+        .isAuth()
+        .then((response) => {
+          if (!response.data) {
+            return
+          }
+          dispatch(setProfile(response.data.user))
+          dispatch(setExpireTimestamp(response.data.expireTimestamp))
+        })
+        .catch(() => {
+          navigate('/login')
+        })
+        .finally(() => {
+          dispatch(setLoading(false))
+        })
+    }, [user.userId, dispatch, navigate])
+    return <WrappedComponent />
   }
 
   return RedirectComponent
