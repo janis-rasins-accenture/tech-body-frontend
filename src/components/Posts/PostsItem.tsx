@@ -25,12 +25,12 @@ const PostsItem = ({ post }: PostsCardsItemProps): JSX.Element => {
                 ? post.imageUrl
                 : 'https://images.pexels.com/photos/1827548/pexels-photo-1827548.jpeg'
             }
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', maxHeight: '215px', objectFit: 'cover' }}
           />
         </Card.Header>
         <Card.Body>
           <Card.Title>{post.title}</Card.Title>
-          <Card.Text>
+          <Card.Text style={{ position: 'relative' }}>
             {isLong ? `${post.text.slice(0, 180)}...` : post.text}
             {isLong ? (
               <div className={styles.viewMore} onClick={() => setModalShow(true)}>
@@ -44,10 +44,20 @@ const PostsItem = ({ post }: PostsCardsItemProps): JSX.Element => {
         </Card.Footer>
       </Card>
       <Modal show={modalShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">{post.title}</Modal.Title>
+        <Modal.Header>
+          <Modal.Title id="contained-modal-title-vcenter">
+            <Image
+              style={{ width: '100%', height: '450px', objectFit: 'cover' }}
+              src={
+                post.imageUrl
+                  ? post.imageUrl
+                  : 'https://images.pexels.com/photos/1827548/pexels-photo-1827548.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              }
+            />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h4>{post.title}</h4>
           <p>{post.text}</p>
         </Modal.Body>
         <Modal.Footer>

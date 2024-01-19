@@ -9,7 +9,6 @@ const postsAPI = {
   },
   async getPosts(): Promise<ResponseIF<PostIF[]>> {
     const response = await callService<PostIF[]>('GET', `posts`)
-    console.log('getPosts', response)
     return response
   },
 }
