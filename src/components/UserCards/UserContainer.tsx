@@ -10,7 +10,7 @@ import { compose } from '@reduxjs/toolkit'
 import withAuthRedirect from '../hoc/withAuthRedirect'
 
 const UserContainer = () => {
-  const users: UserIF[] | undefined = useSelector((state: RootState) => state.users.users)
+  const users: UserIF[] = useSelector((state: RootState) => state.users.users)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -27,7 +27,7 @@ const UserContainer = () => {
         })
     }
   }, [users, dispatch])
-  return Object.keys(users) ? <UserCards users={users} /> : null
+  return users.length ? <UserCards users={users} /> : null
 }
 
 export default compose(withAuthRedirect)(UserContainer)

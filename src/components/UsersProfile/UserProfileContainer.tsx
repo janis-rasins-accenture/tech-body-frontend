@@ -1,6 +1,5 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container'
-import UsersProfile from './UsersProfile'
+import UserProfile from './UserProfile'
 import { UserIF } from '../../types/users'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
@@ -10,16 +9,16 @@ import PostsByUserContainer from '../PostsByUser/PostsByUserContainer'
 import { useParams } from 'react-router-dom'
 import usersAPI from '../../api/usersApi'
 import { setLoading } from '../common/Loader/loaderSlice'
-import { setUserProfile } from './userProfileSlice'
+import { setTargetProfile } from './userProfileSlice'
 import { ResponseIF } from '../../api/models'
 import { setAlert } from '../common/Alert/alertSlice'
 import { AlertEnum } from '../common/Alert/models'
 
-const UsersProfileContainer = () => {
+const UserProfileContainer = () => {
   const { userName } = useParams()
   const dispatch = useDispatch()
 
-  const userProfile: UserIF[] = useSelector((state: RootState) => state.userProfile.userProfile)
+  const targetProfile: UserIF = useSelector((state: RootState) => state.targetProfile.targetProfile)
 
   React.useEffect(() => {
     if (!userName) {
@@ -30,7 +29,7 @@ const UsersProfileContainer = () => {
       .getUserByName(userName)
       .then((response) => {
         if (response.data) {
-          dispatch(setUserProfile(response.data))
+          dispatch(setTargetProfile(response.data))
         }
       })
       .catch((error: ResponseIF<undefined>) => {
@@ -42,13 +41,12 @@ const UsersProfileContainer = () => {
       })
   }, [userName, dispatch])
 
-  return Object.keys(userProfile).length ? (
-    <Container>
-      <UsersProfile userProfile={userProfile} />
-      <div className="mt-4"></div>
+  return targetProfile.userId ? (
+    <>
+      <UserProfile targetProfile={targetProfile} />
       <PostsByUserContainer />
-    </Container>
+    </>
   ) : null
 }
 
-export default compose(withAuthRedirect)(UsersProfileContainer)
+export default compose(withAuthRedirect)(UserProfileContainer)

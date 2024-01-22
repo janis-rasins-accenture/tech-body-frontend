@@ -6,13 +6,13 @@ import slidesReducer from '../components/CarouselExample/slidesSlice'
 import textsReducer from '../components/Accordion/textsSlice'
 import alertReducer from '../components/common/Alert/alertSlice'
 import postsReducer from '../components/Posts/postsSlice'
-import userProfileReducer from '../components/UsersProfile/userProfileSlice'
+import targetProfileReducer from '../components/UsersProfile/userProfileSlice'
 
 export const store = configureStore({
   reducer: {
     isLoading: isLoadingReducer,
     profile: profileReducer,
-    userProfile: userProfileReducer,
+    targetProfile: targetProfileReducer,
     users: usersReducer,
     slides: slidesReducer,
     texts: textsReducer,

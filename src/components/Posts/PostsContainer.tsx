@@ -8,9 +8,11 @@ import postsAPI from '../../api/postsApi'
 import { setPosts } from './postsSlice'
 import withAuthRedirect from '../hoc/withAuthRedirect'
 import { compose } from '@reduxjs/toolkit'
+import { UserIF } from '../../types/users'
 
 const PostsContainer = () => {
-  const posts: PostIF[] | undefined = useSelector((state: RootState) => state.posts.posts)
+  const posts: PostIF[] = useSelector((state: RootState) => state.posts.posts)
+  const currentProfile: UserIF = useSelector((state: RootState) => state.profile.profile)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -27,7 +29,7 @@ const PostsContainer = () => {
         })
     }
   }, [posts, dispatch])
-  return Object.keys(posts) ? <Posts posts={posts} /> : null
+  return posts.length ? <Posts posts={posts} currentProfile={currentProfile} /> : null
 }
 
 export default compose(withAuthRedirect)(PostsContainer)
