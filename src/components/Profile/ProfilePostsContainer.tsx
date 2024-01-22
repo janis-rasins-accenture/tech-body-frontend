@@ -7,30 +7,29 @@ import postsAPI from '../../api/postsApi'
 import withAuthRedirect from '../hoc/withAuthRedirect'
 import { compose } from '@reduxjs/toolkit'
 import Posts from '../Posts/Posts'
-import { setTargetPosts } from '../UsersProfile/userProfileSlice'
 import { UserIF } from '../../types/users'
+import { setCurrentProfilePosts } from './profileSlice'
 
-const PostsByUserContainer = () => {
-  const posts: PostIF[] = useSelector((state: RootState) => state.targetProfile.posts)
-  const targetProfile: UserIF = useSelector((state: RootState) => state.targetProfile.targetProfile)
+const ProfilePostsContainer = () => {
+  const posts: PostIF[] = useSelector((state: RootState) => state.profile.posts)
   const currentProfile: UserIF = useSelector((state: RootState) => state.profile.profile)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    if (!posts?.length || posts[0].userId !== targetProfile.userId) {
+    if (!posts?.length) {
       postsAPI
-        .getPostsByUser(targetProfile.userId)
+        .getPostsByUser(currentProfile.userId)
         .then((data) => {
           if (data.data) {
-            dispatch(setTargetPosts(data.data))
+            dispatch(setCurrentProfilePosts(data.data))
           }
         })
         .catch((error: ResponseIF<undefined>) => {
           console.log('Fetch posts error: ', error)
         })
     }
-  }, [posts, dispatch, targetProfile.userId])
+  }, [posts, dispatch, currentProfile.userId])
   return posts.length ? <Posts posts={posts} currentProfile={currentProfile} /> : null
 }
 
-export default compose(withAuthRedirect)(PostsByUserContainer)
+export default compose(withAuthRedirect)(ProfilePostsContainer)

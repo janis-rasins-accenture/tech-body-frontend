@@ -1,21 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { UserIF } from '../../types/users'
+import { PostIF } from '../../types/posts'
 
 const initialState = {
-  userProfile: [] as UserIF[],
+  targetProfile: {} as UserIF,
+  posts: [] as PostIF[],
 }
 
 export const userSlice = createSlice({
-  name: 'userProfile',
+  name: 'targetProfile',
   initialState,
   reducers: {
-    setUserProfile: (state, action: PayloadAction<UserIF[]>) => {
-      state.userProfile = action.payload
+    setTargetProfile: (state, action: PayloadAction<UserIF>) => {
+      state.targetProfile = action.payload
+    },
+    setTargetPosts: (state, action: PayloadAction<PostIF[]>) => {
+      state.posts = action.payload
     },
   },
 })
 
-export const { setUserProfile } = userSlice.actions
+export const { setTargetProfile, setTargetPosts } = userSlice.actions
 
 export default userSlice.reducer

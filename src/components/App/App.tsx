@@ -6,13 +6,13 @@ import { Route, Routes } from 'react-router-dom'
 import UserContainer from '../UserCards/UserContainer'
 import CreateNewUserContainer from '../CreateUser/CreateNewUserContainer'
 import LoginContainer from '../Login/LoginContainer'
-import ProfileContainer from '../Profile/ProfileContainer'
 import LogoutContainer from '../Logout/LogoutContainer'
 import NavbarContainer from '../Navbar/NavbarContainer'
 import AlertContainer from '../common/Alert/AlertContainer'
 import PostsContainer from '../Posts/PostsContainer'
-import UsersProfileContainer from '../UsersProfile/UsersProfileContainer'
+import UserProfileContainer from '../UsersProfile/UserProfileContainer'
 import NotMatch from '../common/NotMatch/NotMatch'
+import ProfileWrapperContainer from '../Profile/ProfileWrapperContainer'
 
 const App = () => {
   return (
@@ -30,9 +30,9 @@ const App = () => {
           //   return fetch(`/fake/api/teams/${params.userName}.json`)
           // }}
           errorElement={<NotMatch />}
-          element={<UsersProfileContainer />}
+          element={<UserProfileContainer />}
         />
-        <Route path="/profile" element={<ProfileContainer />} />
+        <Route path="/profile" element={<ProfileWrapperContainer />} />
         <Route path="/posts" element={<PostsContainer />} />
         <Route path="/login" element={<LoginContainer />} />
         <Route path="/logout" element={<LogoutContainer />} />

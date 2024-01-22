@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { UserIF } from '../../types/users'
+import { PostIF } from '../../types/posts'
 
 const initialState = {
   profile: {} as UserIF,
   expireTimestamp: 0,
-  targetProfile: {} as UserIF,
   loginError: '',
+  posts: [] as PostIF[],
 }
 
 export const profileSlice = createSlice({
@@ -19,17 +20,22 @@ export const profileSlice = createSlice({
     setExpireTimestamp: (state, action: PayloadAction<number>) => {
       state.expireTimestamp = action.payload
     },
-    setTargetProfile: (state, action: PayloadAction<UserIF>) => {
-      state.targetProfile = action.payload
-    },
     setLoginError: (state, action: PayloadAction<string>) => {
       state.loginError = action.payload
     },
     resetProfile: () => initialState,
+    setCurrentProfilePosts: (state, action: PayloadAction<PostIF[]>) => {
+      state.posts = action.payload
+    },
   },
 })
 
-export const { setProfile, setTargetProfile, setLoginError, setExpireTimestamp, resetProfile } =
-  profileSlice.actions
+export const {
+  setProfile,
+  setLoginError,
+  setExpireTimestamp,
+  resetProfile,
+  setCurrentProfilePosts,
+} = profileSlice.actions
 
 export default profileSlice.reducer
