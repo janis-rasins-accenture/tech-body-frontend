@@ -7,7 +7,7 @@ import postsAPI from '../../api/postsApi'
 import withAuthRedirect from '../hoc/withAuthRedirect'
 import { compose } from '@reduxjs/toolkit'
 import Posts from '../Posts/Posts'
-import { setTargetPosts } from '../UsersProfile/userProfileSlice'
+import { setTargetPosts } from '../../store/slices/userProfileSlice'
 import { UserIF } from '../../types/users'
 
 const PostsByUserContainer = () => {

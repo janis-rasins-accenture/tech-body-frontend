@@ -6,7 +6,7 @@ import slidesReducer from '../components/CarouselExample/slidesSlice'
 import textsReducer from '../components/Accordion/textsSlice'
 import alertReducer from '../components/common/Alert/alertSlice'
 import postsReducer from '../components/Posts/postsSlice'
-import targetProfileReducer from '../components/UsersProfile/userProfileSlice'
+import targetProfileReducer from './slices/userProfileSlice'
 
 export const store = configureStore({
   reducer: {

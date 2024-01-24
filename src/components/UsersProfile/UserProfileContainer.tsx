@@ -1,47 +1,31 @@
 import React from 'react'
 import UserProfile from './UserProfile'
 import { UserIF } from '../../types/users'
-import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import { compose } from '@reduxjs/toolkit'
 import withAuthRedirect from '../hoc/withAuthRedirect'
 import PostsByUserContainer from '../PostsByUser/PostsByUserContainer'
 import { useParams } from 'react-router-dom'
-import usersAPI from '../../api/usersApi'
-import { setLoading } from '../common/Loader/loaderSlice'
-import { setTargetProfile } from './userProfileSlice'
-import { ResponseIF } from '../../api/models'
-import { setAlert } from '../common/Alert/alertSlice'
-import { AlertEnum } from '../common/Alert/models'
+import { getProfile } from '../../store/actions/profileActions'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 const UserProfileContainer = () => {
   const { userName } = useParams()
-  const dispatch = useDispatch()
 
-  const targetProfile: UserIF = useSelector((state: RootState) => state.targetProfile.targetProfile)
+  const targetProfile: UserIF = useAppSelector(
+    (state: RootState) => state.targetProfile.targetProfile
+  )
+  const isLoading = useAppSelector((state: RootState) => state.isLoading.state)
+  const dispatch = useAppDispatch()
 
   React.useEffect(() => {
     if (!userName) {
       return
     }
-    dispatch(setLoading(true))
-    usersAPI
-      .getUserByName(userName)
-      .then((response) => {
-        if (response.data) {
-          dispatch(setTargetProfile(response.data))
-        }
-      })
-      .catch((error: ResponseIF<undefined>) => {
-        console.log('Get user error: ', error)
-        dispatch(setAlert({ message: error.message, variant: AlertEnum.DANGER }))
-      })
-      .finally(() => {
-        dispatch(setLoading(false))
-      })
+    dispatch(getProfile(userName))
   }, [userName, dispatch])
 
-  return targetProfile.userId ? (
+  return targetProfile.userId && !isLoading ? (
     <>
       <UserProfile targetProfile={targetProfile} />
       <PostsByUserContainer />

@@ -7,8 +7,9 @@ const usersAPI = {
     const response = await callService<UserIF>('POST', `users/${userId}`)
     return response
   },
-  async getUserByName(userName: string): Promise<ResponseIF<UserIF>> {
-    const response = await callService<UserIF>('GET', `user/${userName}`)
+  async getUserByName(userName: string): Promise<ResponseIF<UserIF[]>> {
+    console.log('Start get user')
+    const response = await callService<UserIF[]>('GET', `user/${userName}`)
     return response
   },
   async getUsers(): Promise<ResponseIF<UserIF[]>> {
