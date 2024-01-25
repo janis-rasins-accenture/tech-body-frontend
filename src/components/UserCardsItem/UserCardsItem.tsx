@@ -12,7 +12,7 @@ const UserCardsItem = ({ item }: UserCardsItemProps): JSX.Element => {
   }
 
   return (
-    <div onClick={handleClick} style={{ cursor: 'pointer', width: '100%' }}>
+    <div onClick={handleClick} style={{ cursor: 'pointer', width: '100%', height: '100%' }}>
       <Card className="d-flex w-100 mb-4">
         <Card.Header className="text-center py-3">
           <Image

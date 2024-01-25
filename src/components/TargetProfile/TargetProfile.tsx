@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap'
 import { UserIF } from '../../types/users'
 import Image from 'react-bootstrap/Image'
 
-const UserProfile = ({ targetProfile }: { targetProfile: UserIF }) => {
+const TargetProfile = ({ targetProfile }: { targetProfile: UserIF }) => {
   return (
     <Row>
       <Col sm={12} md={6} xl={4} className="d-flex">
@@ -35,4 +35,4 @@ const UserProfile = ({ targetProfile }: { targetProfile: UserIF }) => {
   )
 }
 
-export default UserProfile
+export default TargetProfile

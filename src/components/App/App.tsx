@@ -3,16 +3,16 @@ import AccordionContainer from '../Accordion/AccordionContainer'
 import CarouselContainer from '../CarouselExample/CarouselContainer'
 import Container from 'react-bootstrap/Container'
 import { Route, Routes } from 'react-router-dom'
-import UserContainer from '../UserCards/UserContainer'
+import UsersContainer from '../UserCards/UsersContainer'
 import CreateNewUserContainer from '../CreateUser/CreateNewUserContainer'
 import LoginContainer from '../Login/LoginContainer'
 import LogoutContainer from '../Logout/LogoutContainer'
 import NavbarContainer from '../Navbar/NavbarContainer'
 import AlertContainer from '../common/Alert/AlertContainer'
 import PostsContainer from '../Posts/PostsContainer'
-import UserProfileContainer from '../UsersProfile/UserProfileContainer'
+import TargetProfileContainer from '../TargetProfile/TargetProfileContainer'
 import NotMatch from '../common/NotMatch/NotMatch'
-import ProfileWrapperContainer from '../Profile/ProfileWrapperContainer'
+import CurrentProfileWrapperContainer from '../CurrentProfile/CurrentProfileWrapperContainer'
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
       <AlertContainer />
       <Routes>
         <Route path="/" element={<CarouselContainer />} />
-        <Route path="/users" element={<UserContainer />} />
+        <Route path="/users" element={<UsersContainer />} />
         <Route path="/faq" element={<AccordionContainer />} />
         <Route path="/registration" element={<CreateNewUserContainer />} />
         <Route
@@ -30,9 +30,9 @@ const App = () => {
           //   return fetch(`/fake/api/teams/${params.userName}.json`)
           // }}
           errorElement={<NotMatch />}
-          element={<UserProfileContainer />}
+          element={<TargetProfileContainer />}
         />
-        <Route path="/profile" element={<ProfileWrapperContainer />} />
+        <Route path="/profile" element={<CurrentProfileWrapperContainer />} />
         <Route path="/posts" element={<PostsContainer />} />
         <Route path="/login" element={<LoginContainer />} />
         <Route path="/logout" element={<LogoutContainer />} />

@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import authAPI from '../../api/authApi'
 import { compose } from '@reduxjs/toolkit'
 import withAuthRedirect from '../hoc/withAuthRedirect'
-import { resetProfile } from '../Profile/profileSlice'
+import { resetProfile } from '../../store/slices/currentProfileSlice'
 
 const LogoutContainer = () => {
   const navigate = useNavigate()

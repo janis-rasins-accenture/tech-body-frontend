@@ -4,7 +4,12 @@ import { PostsCardsItemProps } from './models'
 import Image from 'react-bootstrap/Image'
 import styles from './Posts.module.css'
 
-const PostsItem = ({ post, currentProfile, setPostItem }: PostsCardsItemProps): JSX.Element => {
+const PostsItem = ({
+  post,
+  currentProfile,
+  setPostModalItem,
+  setPostEditModalItem,
+}: PostsCardsItemProps): JSX.Element => {
   const isLong = post.text.length > 200
 
   const convertTimestampToDateString = (timestamp: number) => {
@@ -12,8 +17,12 @@ const PostsItem = ({ post, currentProfile, setPostItem }: PostsCardsItemProps): 
     return date.toLocaleString()
   }
 
-  const onClickHandler = () => {
-    setPostItem(post)
+  const onClickShowMoreHandler = () => {
+    setPostModalItem(post)
+  }
+
+  const onClickEditHandler = () => {
+    setPostEditModalItem(post)
   }
 
   return (
@@ -33,7 +42,7 @@ const PostsItem = ({ post, currentProfile, setPostItem }: PostsCardsItemProps): 
         <Card.Text style={{ position: 'relative' }}>
           {isLong ? `${post.text.slice(0, 180)}...` : post.text}
           {isLong ? (
-            <span className={styles.viewMore} onClick={onClickHandler}>
+            <span className={styles.viewMore} onClick={onClickShowMoreHandler}>
               Show more
             </span>
           ) : null}
@@ -43,7 +52,7 @@ const PostsItem = ({ post, currentProfile, setPostItem }: PostsCardsItemProps): 
         <small className="d-flex text-muted justify-content-between">
           {convertTimestampToDateString(post.unixTimestamp)}{' '}
           {post.userId === currentProfile.userId ? (
-            <Button variant="outline-primary" size="sm">
+            <Button variant="outline-primary" size="sm" onClick={onClickEditHandler}>
               Edit
             </Button>
           ) : null}

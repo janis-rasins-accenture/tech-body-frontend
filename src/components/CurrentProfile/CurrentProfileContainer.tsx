@@ -1,21 +1,19 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container'
-import Profile from './Profile'
+import CurrentProfile from './CurrentProfile'
 import { UserIF } from '../../types/users'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import { compose } from '@reduxjs/toolkit'
 import withAuthRedirect from '../hoc/withAuthRedirect'
 
-const ProfileContainer = () => {
-  const user: UserIF = useSelector((state: RootState) => state.profile.profile)
-
+const CurrentProfileContainer = () => {
+  const user: UserIF = useSelector((state: RootState) => state.currentProfile.currentProfile)
   return Object.keys(user).length ? (
-    <Container>
-      <Profile user={user} />
+    <>
+      <CurrentProfile user={user} />
       <div className="mt-4"></div>
-    </Container>
+    </>
   ) : null
 }
 
-export default compose(withAuthRedirect)(ProfileContainer)
+export default compose(withAuthRedirect)(CurrentProfileContainer)

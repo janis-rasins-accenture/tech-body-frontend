@@ -1,20 +1,20 @@
 import React from 'react'
-import * as Yup from 'yup'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import Login from './Login'
 import { setLoading } from '../common/Loader/loaderSlice'
 import authAPI from '../../api/authApi'
-import { setLoginError, setProfile } from '../Profile/profileSlice'
+import { setLoginError, setProfile } from '../../store/slices/currentProfileSlice'
 import { UserAuthIF, UserIF } from '../../types/users'
 import { ResponseIF } from '../../api/models'
-import { CustomFormIF } from '../common/CustomForm/models'
 import { setAlert } from '../common/Alert/alertSlice'
 import { AlertEnum } from '../common/Alert/models'
+import formFields from './formFields'
+import validationSchema from './validation'
 
 const LoginContainer = () => {
-  const { loginError, profile } = useSelector((state: RootState) => state.profile)
+  const { loginError, currentProfile } = useSelector((state: RootState) => state.currentProfile)
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch()
@@ -22,10 +22,10 @@ const LoginContainer = () => {
   const from = location.state?.from?.pathname || '/'
 
   React.useEffect(() => {
-    if (Object.keys(profile).length) {
+    if (Object.keys(currentProfile).length) {
       navigate(from, { replace: true })
     }
-  }, [loginError, profile, from, navigate])
+  }, [loginError, currentProfile, from, navigate])
 
   const submitLogin = (values: UserAuthIF) => {
     dispatch(setLoading(true))
@@ -49,46 +49,10 @@ const LoginContainer = () => {
       })
   }
 
-  const formFields: CustomFormIF[] = [
-    {
-      feedbackMessage: 'Fine!',
-      grids: {
-        xxl: '6',
-        xl: '6',
-        lg: '6',
-        md: '6',
-        sm: '12',
-      },
-      id: 'email',
-      name: 'email',
-      label: 'Email',
-      type: 'email',
-    },
-    {
-      feedbackMessage: 'Fine!',
-      grids: {
-        xxl: '6',
-        xl: '6',
-        lg: '6',
-        md: '6',
-        sm: '12',
-      },
-      id: 'password',
-      name: 'password',
-      label: 'Password',
-      type: 'Password',
-    },
-  ]
-
   const initialValues: UserAuthIF = {
     email: '',
     password: '',
   }
-
-  const validationSchema: Yup.ObjectSchema<UserAuthIF> = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().required(),
-  })
 
   return (
     <Login

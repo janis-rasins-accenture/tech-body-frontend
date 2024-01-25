@@ -8,7 +8,7 @@ const initialState = {
   posts: [] as PostIF[],
 }
 
-export const userSlice = createSlice({
+export const targetProfileSlice = createSlice({
   name: 'targetProfile',
   initialState,
   reducers: {
@@ -21,6 +21,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { setTargetProfile, setTargetPosts } = userSlice.actions
+export const { setTargetProfile, setTargetPosts } = targetProfileSlice.actions
 
-export default userSlice.reducer
+export default targetProfileSlice.reducer

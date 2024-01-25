@@ -4,18 +4,18 @@ import { UserIF } from '../../types/users'
 import { PostIF } from '../../types/posts'
 
 const initialState = {
-  profile: {} as UserIF,
+  currentProfile: {} as UserIF,
   expireTimestamp: 0,
   loginError: '',
   posts: [] as PostIF[],
 }
 
-export const profileSlice = createSlice({
-  name: 'profile',
+export const currentProfileSlice = createSlice({
+  name: 'currentProfile',
   initialState,
   reducers: {
     setProfile: (state, action: PayloadAction<UserIF>) => {
-      state.profile = action.payload
+      state.currentProfile = action.payload
     },
     setExpireTimestamp: (state, action: PayloadAction<number>) => {
       state.expireTimestamp = action.payload
@@ -27,6 +27,16 @@ export const profileSlice = createSlice({
     setCurrentProfilePosts: (state, action: PayloadAction<PostIF[]>) => {
       state.posts = action.payload
     },
+    addPost: (state, action: PayloadAction<PostIF>) => {
+      const postIndex = state.posts.findIndex((post) => {
+        return action.payload.postId === post.postId
+      })
+      const newPosts = [...state.posts]
+      newPosts[postIndex] = {
+        ...action.payload,
+      }
+      state.posts = [...newPosts]
+    },
   },
 })
 
@@ -36,6 +46,7 @@ export const {
   setExpireTimestamp,
   resetProfile,
   setCurrentProfilePosts,
-} = profileSlice.actions
+  addPost,
+} = currentProfileSlice.actions
 
-export default profileSlice.reducer
+export default currentProfileSlice.reducer
