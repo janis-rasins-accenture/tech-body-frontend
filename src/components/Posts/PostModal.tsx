@@ -5,9 +5,9 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { PostIF } from '../../types/posts'
 
-const PostModal = ({ post, setPostItem }: PostsModalProps) => {
+const PostModal = ({ post, setPostModalItem }: PostsModalProps) => {
   const closeModalHandler = () => {
-    setPostItem({} as PostIF)
+    setPostModalItem({} as PostIF)
   }
 
   return (

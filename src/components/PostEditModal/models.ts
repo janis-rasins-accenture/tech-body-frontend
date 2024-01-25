@@ -11,5 +11,4 @@ export type CustomFormIF = {
   label: string
   feedbackMessage: string
   id: string
-  rows?: number
 }

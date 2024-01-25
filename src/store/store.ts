@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import isLoadingReducer from '../components/common/Loader/loaderSlice'
-import profileReducer from '../components/Profile/profileSlice'
-import usersReducer from '../components/UserCards/usersSlice'
-import slidesReducer from '../components/CarouselExample/slidesSlice'
-import textsReducer from '../components/Accordion/textsSlice'
+import currentProfileReducer from './slices/currentProfileSlice'
+import usersReducer from './slices/usersSlice'
+import slidesReducer from './slices/slidesSlice'
+import textsReducer from './slices/textsSlice'
 import alertReducer from '../components/common/Alert/alertSlice'
-import postsReducer from '../components/Posts/postsSlice'
-import targetProfileReducer from '../components/UsersProfile/userProfileSlice'
+import postsReducer from './slices/postsSlice'
+import targetProfileReducer from './slices/targetProfileSlice'
 
 export const store = configureStore({
   reducer: {
     isLoading: isLoadingReducer,
-    profile: profileReducer,
+    currentProfile: currentProfileReducer,
     targetProfile: targetProfileReducer,
     users: usersReducer,
     slides: slidesReducer,

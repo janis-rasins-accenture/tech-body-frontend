@@ -13,13 +13,14 @@ interface CustomFormFieldProps {
 }
 
 const CustomFormField = ({
-  formField: { grids, type, name, feedbackMessage, id, label },
+  formField: { grids, type, name, feedbackMessage, id, label, rows },
   handleChange,
   isValid,
   isInvalid,
   error,
   value,
 }: CustomFormFieldProps) => {
+  const inputType = ['email', 'text', 'number', 'password']
   return (
     <Form.Group
       as={Col}
@@ -32,12 +33,13 @@ const CustomFormField = ({
     >
       <Form.Label>{label}</Form.Label>
       <Form.Control
-        type={type}
+        {...(inputType.includes(type) ? { type } : { as: 'textarea' })}
         name={name}
         value={value}
         onChange={handleChange}
         isValid={isValid}
         isInvalid={isInvalid}
+        {...{ rows }}
       />
       <Form.Control.Feedback>{feedbackMessage}</Form.Control.Feedback>
       <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>

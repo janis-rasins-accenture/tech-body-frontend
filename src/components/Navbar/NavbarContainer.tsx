@@ -4,7 +4,7 @@ import { RootState } from '../../store/store'
 import Navbar from './Navbar'
 
 const NavbarContainer = () => {
-  const user = useSelector((state: RootState) => state.profile.profile)
+  const user = useSelector((state: RootState) => state.currentProfile.currentProfile)
   return <Navbar user={user} />
 }
 
